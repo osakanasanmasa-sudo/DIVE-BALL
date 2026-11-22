@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#050814">
 <title>DIVEBALL</title>
 <style>
 :root{--bg:#0b1020;--fg:#fff}
@@ -543,6 +543,78 @@ body.inMenu #hud{visibility:hidden}
 #wlcm .wT{font-size:22px;font-weight:900;color:#ffe36b}#wlcm .wC{font:900 56px Impact,sans-serif;color:#ffd23f;margin:10px 0;text-shadow:0 0 18px rgba(255,180,31,.7)}
 #wlcm .wN{font-size:14px;opacity:.85;line-height:1.7;margin-bottom:16px}#wlcm button{padding:12px 36px;border-radius:12px;border:0;background:linear-gradient(#ffd23f,#ff9a1f);color:#2a1800;font:900 18px inherit;cursor:pointer}
 .bkA{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0;padding:6px 10px;background:rgba(0,0,0,.25);border-radius:8px;font-size:14px}
+#verTag{position:fixed;left:10px;bottom:6px;z-index:60;font:700 12px/1 monospace;letter-spacing:.06em;color:rgba(255,255,255,.55);text-shadow:0 1px 3px #000;pointer-events:none}
+/* ガチャの表記をさらに大きく */
+#gcSel .gcTile{width:min(450px,90vw);padding:26px 16px 22px;gap:12px}
+#gcSel .gtBadge{font-size:14px;padding:3px 16px}
+#gcSel .gtName{font-size:34px}
+#gcSel .gtC{gap:10px}
+#gcSel .gtC .gcCard{max-width:140px;padding:8px 4px;aspect-ratio:auto!important;min-height:190px}
+#gcSel .gtC .gcOvr{font-size:42px;margin-top:4px}
+#gcSel .gtC .gcPos{font-size:16px}
+#gcSel .gtC .gcName{font-size:17px;line-height:1.25;margin-top:4px}
+#gcSel .gtC .gcSk{font-size:12px;white-space:normal;margin:5px 2px 0;padding:3px 2px;letter-spacing:-.02em}
+#gcSel .gtC .gcTier{font-size:14px}
+#gcSel .gtInfo{font-size:19px;gap:10px}#gcSel .gtInfo span{padding:6px 14px}
+#gcSel .gtPity{font-size:17px}
+#gcSel .gtGo{font-size:22px;padding:14px 34px}
+#menuGacha h2{font-size:44px}
+#menuGacha .msCoin{font-size:26px;padding:8px 22px}
+#gcHint{font-size:16px}
+#gcDetail .gtC .gcCard{width:min(220px,30vw)}
+#gcDetail .gtC .gcOvr,#gcDetail .gcPick .gcOvr{font-size:52px}
+#gcDetail .gtC .gcName,#gcDetail .gcPick .gcName{font-size:18px}
+#gcDetail .gtC .gcSk,#gcDetail .gcPick .gcSk{font-size:13.5px}
+#gcDetail .gtC .gcPos,#gcDetail .gcPick .gcPos{font-size:16px}
+#menu.fullOn .gcBtns button{font-size:24px;padding:16px 18px}
+#gcOut .gcCard .gcName{font-size:16px}#gcOut .gcCard .gcOvr{font-size:44px}#gcOut .gcCard .gcSk{font-size:12.5px}#gcOut .gcCard .gcPos{font-size:15px}
+.gcBtns button small{font-size:17px;margin-top:4px}
+.gcLstBtn{font-size:19px;padding:11px 24px}
+#gcRates{font-size:16px;line-height:1.6}
+#menuGacha .msNote,#menuGacha small{font-size:15px}
+#gcDetail>div:first-child,#gcDetail .gcBn{font-size:24px}
+#menuGacha #gcBack{font-size:20px}
+.gtC.car,.gcPick.car{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);padding:10px 0;margin-top:-4px}
+#gcPkDots:empty{display:none}.gcPick .gcCard[data-id],#gcOut .gcCard[data-id]{cursor:pointer}.gcPick.many{flex-wrap:wrap}#gcDetail .gcPick.many .gcCard{width:min(196px,22vw)}
+.gcPick.car{display:block!important;width:calc(3 * min(196px,29vw) + 32px);max-width:100%;margin:8px auto 12px;box-sizing:content-box}
+.pkTrack{display:flex;gap:var(--g,10px);width:100%;will-change:transform}
+.pkTrack>.gcCard{flex:0 0 calc((100% - 2 * var(--g,10px)) / 3)!important;width:auto!important;max-width:none!important;min-width:0}
+@keyframes pkFlip{0%{opacity:0;transform:perspective(700px) translateY(18px) rotateX(-55deg) scale(.92);filter:brightness(2.2) blur(2px)}60%{opacity:1;filter:brightness(1.4)}100%{opacity:1;transform:none;filter:none}}
+.rot>*{animation:pkFlip .75s cubic-bezier(.2,.9,.25,1) both}.rot>*:nth-child(2){animation-delay:.1s}.rot>*:nth-child(3){animation-delay:.2s}
+.pkDots{display:flex;align-items:center;justify-content:center;gap:7px;min-height:34px;margin:2px 0}
+.pkArr{display:inline-flex;width:30px;height:30px;border-radius:50%;background:rgba(255,210,63,.16);border:1.5px solid rgba(255,210,63,.65);color:#ffe27a;font:900 22px/1 sans-serif;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:all .2s;padding-bottom:3px;box-sizing:border-box}.pkArr:hover{background:rgba(255,210,63,.4);color:#fff;transform:scale(1.12)}.pkArr:active{transform:scale(.92)}
+.pkDots i{cursor:pointer;position:relative}.pkDots i::after{content:'';position:absolute;inset:-10px -4px}.gtC.car,.gcPick.car{cursor:grab;user-select:none;-webkit-user-select:none}
+.pkDots .pkLbl{font-size:13px;letter-spacing:.12em;color:#ffe27a;margin-right:6px;font-weight:800;text-shadow:0 0 8px rgba(255,210,63,.5)}.pkDots .pkLbl em{font-style:normal;font-size:17px;color:#fff}
+.pkDots i{width:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.22);transition:all .5s}.pkDots i.on{background:linear-gradient(90deg,#ffd23f,#ff8cf0);box-shadow:0 0 8px rgba(255,200,80,.8);width:34px}
+#gcSel .pkDots{margin-top:-2px}
+/* ガチャ一覧: スクロールバーを太く・矢印ボタン・ドラッグ/ホイール対応 */
+#gcSel{scrollbar-width:auto;scrollbar-color:#ffd23f rgba(255,255,255,.18);cursor:grab}
+#gcSel.drag{cursor:grabbing;scroll-snap-type:none}
+#gcSel::-webkit-scrollbar{height:22px}
+#gcSel::-webkit-scrollbar-track{background:rgba(255,255,255,.14);border-radius:11px}
+#gcSel::-webkit-scrollbar-thumb{background:#ffd23f;border-radius:11px;border:4px solid rgba(20,20,40,.9)}
+#gcSel::-webkit-scrollbar-thumb:hover{background:#ffe680}
+.gcArr{position:fixed;top:50%;transform:translateY(-50%);z-index:60;width:64px;height:96px;border:0;border-radius:14px;background:rgba(255,210,63,.92);color:#1a1a2e;font-size:40px;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.gcArr:hover{background:#ffe680}.gcArr:active{transform:translateY(-50%) scale(.95)}
+#gcPrev{left:10px}#gcNext{right:10px}
+
+/* ---- touch ---- */
+#tc{position:fixed;inset:0;z-index:60;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;display:none}
+#tc button{font-family:inherit;color:#fff;border:2px solid rgba(255,255,255,.55);background:rgba(20,30,60,.45);backdrop-filter:blur(3px);border-radius:50%;position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;touch-action:none;padding:0}
+#tc .tb b{font-size:15px}#tc .tb small{font-size:9px;opacity:.8}
+#tc button.on{background:rgba(255,200,40,.6);border-color:#fff;transform:scale(.94)}
+#tcThrow{width:104px;height:104px;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));background:rgba(255,90,40,.5)!important}
+#tcPick{width:72px;height:72px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:max(18px,env(safe-area-inset-bottom))}
+#tcJump{width:72px;height:72px;right:max(26px,env(safe-area-inset-right));bottom:calc(max(18px,env(safe-area-inset-bottom)) + 118px)}
+#tcDive{width:72px;height:72px;right:calc(max(18px,env(safe-area-inset-right)) + 100px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 100px);background:rgba(40,140,255,.45)!important}
+#tcPause{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:44px;height:44px;font-size:18px}
+#tcHint{position:absolute;left:50%;bottom:calc(max(6px,env(safe-area-inset-bottom)) + 34px);transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none;animation:tcH 8s forwards}@keyframes tcH{0%,80%{opacity:1}100%{opacity:0}}
+#tcBase{display:none;position:absolute;width:116px;height:116px;margin:-58px 0 0 -58px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);pointer-events:none}
+#tcKnob{position:absolute;left:50%;top:50%;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.5);transform:translate(-50%,-50%)}
+#tcRot{display:none;position:fixed;inset:0;background:rgba(5,8,20,.92);color:#fff;font-size:22px;align-items:center;justify-content:center;text-align:center}
+@media (orientation:portrait){body.touch #tcRot{display:flex}}
+body.touch{overscroll-behavior:none}body.touch #hint{display:none}body.touch #state{right:auto;left:50%;transform:translateX(-50%);bottom:10px;font-size:12px;max-width:44vw;text-align:center}body.touch #start{-webkit-tap-highlight-color:transparent}
+@media (max-height:500px){#tcThrow{width:88px;height:88px}#tcPick,#tcJump,#tcDive{width:60px;height:60px}#tcPick{right:calc(max(14px,env(safe-area-inset-right)) + 100px)}#tcJump{bottom:calc(max(18px,env(safe-area-inset-bottom)) + 98px)}#tcDive{right:calc(max(18px,env(safe-area-inset-right)) + 84px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 84px)}#tc .tb b{font-size:13px}}
 </style></head>
 <body>
 <div id="ldScr"><div id="ldT">DIVEBALL</div><div id="ldB"><i></i></div><div id="ldM">読み込み中…</div></div>
@@ -587,15 +659,21 @@ body.inMenu #hud{visibility:hidden}
 
 <div id="menuLeague" style="display:none"><h2>AIリーグ</h2><div class="lgWrap"><div class="lgLad" id="lgLad"></div><div id="lgMain"></div></div><div class="lgBtns"><button class="mbtn" id="mLgGo">次の試合へ<small></small></button><button class="mbtn set" id="mLgReset">リーグをはじめから<small>5部からやり直す</small></button><button class="mbtn set" id="mLgBack">← もどる</button></div></div>
 <div id="menuMission" style="display:none"><h2>ミッション</h2><div class="msTop"><div class="msCoin">🪙 <b id="msCoin">0</b></div><div class="msTabs"><button data-k="day">デイリー<i></i></button><button data-k="week">ウィークリー<i></i></button><button data-k="ach">実績<i></i></button></div></div><div class="msNote" id="msNote"></div><div id="msList"></div><div class="lgBtns"><button class="mbtn set" id="msAll">受け取れるものをすべて受け取る</button><button class="mbtn set" id="msBack">← もどる</button></div></div>
-<div id="menuGacha" style="display:none"><h2>ガチャ</h2><div class="msTop"><div class="msCoin">🪙 <b id="gcCoin">0</b></div><div class="msCoin" id="gcPity" style="border-color:#ff4dd8;background:rgba(255,77,216,.12)"></div></div><div id="gcSel"></div><div class="msNote" id="gcHint" style="display:none;text-align:center;color:#ffe27a;font-weight:700"></div><div id="gcDetail" style="display:none"><h3 id="gcTitle"></h3><div class="gcPick" id="gcPick"></div><div class="gcBtns"><button id="gc1">1回引く<small>🪙 100</small></button><button id="gc10">10連<small>🪙 900（レア以上1枚保証）</small></button></div><button class="gcLstBtn" id="gcLstBtn">📖 排出キャラ一覧</button><div id="gcLst" style="display:none"><div class="msTabs" id="gcLstTabs"></div><div class="msNote" id="gcLstNote"></div><div id="gcLstGrid"></div><div id="gcLstDet"></div></div><div id="gcOut"></div><div class="msNote" id="gcRates"></div></div><div class="lgBtns"><button class="mbtn set" id="gcBack">← もどる</button></div></div>
+<div id="menuGacha" style="display:none"><h2>ガチャ</h2><div class="msTop"><div class="msCoin">🪙 <b id="gcCoin">0</b></div><div class="msCoin" id="gcPity" style="border-color:#ff4dd8;background:rgba(255,77,216,.12)"></div></div><div id="gcSel"></div><button class="gcArr" id="gcPrev" style="display:none">◀</button><button class="gcArr" id="gcNext" style="display:none">▶</button><div class="msNote" id="gcHint" style="display:none;text-align:center;color:#ffe27a;font-weight:700"></div><div id="gcDetail" style="display:none"><h3 id="gcTitle"></h3><div class="gcPick" id="gcPick"></div><div class="pkDots" id="gcPkDots"></div><div class="msNote" id="gcPkHint" style="display:none;text-align:center;margin:-4px 0 6px;color:#ffe27a">👆 カードをタップすると、ステータスとスキルの詳細が見られる</div><div class="gcBtns"><button id="gc1">1回引く<small>🪙 100</small></button><button id="gc10">10連<small>🪙 900（レア以上1枚保証）</small></button></div><button class="gcLstBtn" id="gcLstBtn">📖 排出キャラ一覧</button><div id="gcLst" style="display:none"><div class="msTabs" id="gcLstTabs"></div><div class="msNote" id="gcLstNote"></div><div id="gcLstGrid"></div><div id="gcLstDet"></div></div><div id="gcOut"></div><div class="msNote" id="gcRates"></div></div><div class="lgBtns"><button class="mbtn set" id="gcBack">← もどる</button></div></div>
 <div id="menuSquad" style="display:none"><h2>スカッド</h2><div class="sqTop"><div class="msCoin">チーム総合 <b id="sqOvr">0</b></div><div class="msNote" id="sqNote">ポジションを選んで、右の手持ち選手から入れ替える（選手を長押ししてポジションへドラッグ、ポジション同士のドラッグで入れ替えもできる）</div></div><div class="sqWrap"><div><div class="sqPitch" id="sqPitch"></div><div id="sqDet"></div></div><div><div class="msNote" id="sqListT"></div><div id="sqList"></div></div></div><div class="lgBtns"><button class="mbtn set" id="sqAuto">⚡ おまかせ編成（総合が高い順）</button><button class="mbtn set" id="sqBack">← もどる</button></div></div>
 <div id="menuPrac" style="display:none"><h2 id="prTitle">練習</h2><div class="msNote" id="prNote">使う選手を選んで「開始」（練習ではポジションによる能力ダウンはなし）</div><div class="sqWrap"><div><div id="prDet"></div></div><div><div class="msNote" id="prListT">手持ちの選手</div><div id="prList"></div></div></div><div class="lgBtns"><button class="mbtn" id="prGo">この選手で開始</button><button class="mbtn set" id="prBack">← 練習メニューへ</button></div></div>
-<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div></div>
+<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div><div id="verTag">v20.2</div></div>
 <div id="result"><div class="rTime">TIME UP</div><div class="rV" id="rVerdict"></div><div class="rScore"><span class="b">BLUE</span><b id="rb">0</b><i>-</i><b id="rr">0</b><span class="r">RED</span></div><div id="rLeague" style="display:none"></div><div id="rMission" style="display:none"></div><ul id="rGoals"></ul><div id="rStats"></div><div class="rBtns"><button id="rAgain">もう一度</button><button id="rMenu">メニューへ</button></div></div>
 <div id="start"><div id="stL"><div id="logo"><svg viewBox="0 0 110 100" aria-hidden="true"><g stroke-linecap="round" fill="none"><path d="M4 30h30" stroke="#ff7a00" stroke-width="6"/><path d="M0 50h28" stroke="#ffb41f" stroke-width="6"/><path d="M8 70h26" stroke="#ff4d1f" stroke-width="6"/></g><g transform="rotate(-18 72 50)"><circle cx="72" cy="50" r="34" fill="#fff" stroke="#0a1226" stroke-width="4"/><path d="M72 36l13 9-5 15H64l-5-15z" fill="#0a1226"/><path d="M72 36V18M85 45l17-6M80 60l10 15M64 60L54 75M59 45L42 39" stroke="#0a1226" stroke-width="3.5" fill="none"/></g></svg><div id="logoT"><span class="a">DIVE</span><span class="b">BALL</span></div></div><p id="tag">5v5 ・ 投げて 飛んで 守れ</p><div id="roomBox" style="display:none"><div class="rbLbl">ROOM CODE</div><div class="rbCode"><b id="roomCode"></b><button id="rbCopy" class="rbBtn">コピー</button></div><div class="rbUrl"><input id="roomUrl" readonly onclick="this.select()"><button id="rbCopyU" class="rbBtn">URLコピー</button></div></div><div id="modeBox" style="display:none"></div><p id="startMsg">ポジションを選んで「試合開始」</p><p id="formTxt" style="font-size:13px">図の選手カードをクリックしてポジションを選ぼう（青＝あなたのチーム、赤＝相手）</p><div id="cardBox"></div><div id="enemyBox" style="display:none"></div><button id="startBtn">試合開始</button><button id="sqChg" style="display:none">スカッド変更</button><button id="backMenu">← メニューへ</button><button id="quitBtn" style="display:none">■ 試合を中断してメニューへ</button><p style="font-size:13px">青チーム（あなた）は奥の ＋Z ゴールを狙おう ／ Shift：ダイビング（パスカット）</p><div id="sensBox">マウス感度 <input id="sens" type="range" min="0.1" max="4" step="0.05" value="1"> <span id="sensVal">1.00x</span><div id="rawInfo" style="font-size:12px;opacity:.8;margin-top:4px"></div></div></div><div id="stR"><div id="posBox"></div></div></div>
 <div id="plModal" style="display:none"><div class="plMBox"><button class="plX" id="plX" aria-label="閉じる">✕</button><button class="plNav l" id="plPrev" aria-label="前の選手">◀</button><button class="plNav r" id="plNext" aria-label="次の選手">▶</button><div id="plDet"></div></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+/* エラー表示（原因調査用）: JSエラーが出たら画面左上に赤く出す */
+(function(){var n=0;function show(m){if(n++>4)return;var d=document.getElementById('errBan');if(!d){d=document.createElement('div');d.id='errBan';d.style.cssText='position:fixed;left:0;top:0;right:0;z-index:99999;background:rgba(160,0,0,.92);color:#fff;font:12px/1.5 monospace;padding:6px 10px;white-space:pre-wrap;max-height:40vh;overflow:auto;pointer-events:auto';d.onclick=function(){d.remove()};document.body.appendChild(d)}d.textContent+=m+'\n（クリックで閉じる）\n'}
+addEventListener('error',function(e){show('ERR: '+e.message+' @'+(e.lineno||'?')+':'+(e.colno||'?')+(e.error&&e.error.stack?'\n'+e.error.stack.split('\n').slice(0,3).join('\n'):''))});
+addEventListener('unhandledrejection',function(e){show('PROMISE: '+(e.reason&&e.reason.message||e.reason))})})();
+</script>
 <script>
 (function(){var m=document.getElementById('ldM'),tips=['ボールを持ったら右クリックでダイブ','ガチャでレジェンド選手をゲットしよう','スキル持ちの選手はカードに金枠で表示','F3で処理負荷のオーバーレイ'],i=0;
 window.ldTip=setInterval(function(){if(m)m.textContent='読み込み中… '+tips[i++%tips.length]},1800);
@@ -804,6 +882,8 @@ const ballMesh=(function(){
   m.castShadow=true;scene.add(m);return m})();
 const ball={p:new THREE.Vector3(0,R,0),v:new THREE.Vector3(),held:false};
 // 拾える範囲（水平距離）を地面に薄く表示
+let egoT=0; // ゴール後の「80固定」残り秒
+let egoM=0; // エゴイストメーター(-100〜100)
 let PSK=''; // いま操作している選手の特殊スキル（複数持ちは空白区切り）
 function has(s,k){return !!s&&(' '+s+' ').indexOf(' '+k+' ')>=0}
 const PK=()=>(has(PSK,'longcatch')?1.4:1)*(has(PSK,'magnet')?1.25:1); // ロングキャッチの範囲倍率
@@ -991,7 +1071,7 @@ const st=k=>stats[k]||(stats[k]={g:0,a:0,s:0});
 function resetStats(){stats={};tr.holder=null;tr.poss=null;tr.log.length=0;tr.clock=0}
 const MATCH_SEC=180; // 1試合の長さ（秒）= 3分
 let playerRole=4,matchStarted=false,matchOver=false,matchT=MATCH_SEC,half=1; // 前半3分＋後半3分
-let htOn=false,htT=0,hRdy=false,gRdy=false,w30=false,w10=false; // ハーフタイム(40秒)・準備OK・残り時間の予告
+let waitFrz=false,htOn=false,htT=0,hRdy=false,gRdy=false,w30=false,w10=false; // ハーフタイム(40秒)・準備OK・残り時間の予告
 const PZ_MAX=60,HT_SEC=40; // オンラインのポーズ持ち時間(秒)・ハーフタイム(秒)
 let phase='play',cdT=0,cdShown=-9,kickT=0,kickTeam=null,kickW=false; // phase: play=試合中 / count=開始前カウントダウン / kick=得点後のキックオフ待ち
 let mode='match',lastMatchRole=4; // match=AI戦 / free / 1v1 / gk1v1 の練習
@@ -1144,16 +1224,21 @@ const MR=mods(BASE_ST);let MB=SQUAD.map(c=>mods(c.st));
 let squadOn=true; // オンライン対戦中は、ホストが「固定」を選ぶと全員 基準の能力。「自由」なら各自のスカッド
 const syncSq=()=>{squadOn=!net.role||!!net.free}
 const mm=u=>(squadOn&&u.team==='B'&&MB[u.role])||(squadOn&&net.free&&u.team==='R'&&net.gMB&&net.gMB[u.role])||MR;
-const PMOD=()=>squadOn?(mode!=='match'?PM_PRAC:(MB[net.role==='guest'?net.myRole:playerRole]||MR)):MR;
+const PMOD0=()=>squadOn?(mode!=='match'?PM_PRAC:(MB[net.role==='guest'?net.myRole:playerRole]||MR)):MR;
+const PMOD=()=>{const b=PMOD0();if(egoM===0||!has(PSK,'ego'))return b;if(egoM>0){const m=egoM/100;return Object.assign({},b,{spd:b.spd*(1+0.15*m),thr:b.thr*(1+0.25*m),pk:b.pk*(1-0.2*m),diveSp:b.diveSp*(1+0.15*m),diveCD:b.diveCD*(1-0.2*m)})}const m=-egoM/100;return Object.assign({},b,{spd:b.spd*(1-0.35*m),thr:b.thr*(1-0.4*m),jit:b.jit+0.25*m,pk:b.pk*(1+0.5*m)})}; // エゴイスト: プラスで能力アップ、マイナスで能力ダウン
+const egoC=()=>has(PSK,'ego')?(egoM>=0?1+0.8*egoM/100:1+0.5*egoM/100):1; // チャージ速度の倍率
+const teaseNear=(x,z,team)=>{for(const d of ORDER){const u=d.userData;if(u.team===team||u.human||!d.visible)continue;if(has(uSk(u),'tease')&&Math.hypot(d.position.x-x,d.position.z-z)<8)return true}return team==='R'&&has(PSK,'tease')&&Math.hypot(player.pos.x-x,player.pos.z-z)<8}
 // スカッドに入れたレジェンドの特殊スキルは、AIが動かす味方も使える（手加減あり: 効果は自分で操作する場合の約半分）
 const uSk=u=>{if(!squadOn||u.human)return '';if(u.team==='B')return (CARDS[sv.squad[u.role]]||SQUAD[u.role]||{}).skill||'';return (net.free&&net.gCards&&(net.gCards[u.role]||{}).skill)||''}
 const hSk=u=>(squadOn&&net.free&&u.human&&u.team==='R'&&net.gCards)?((net.gCards[u.role]||{}).skill||''):'' // オンライン自由スカッドでのゲスト本人のスキル
 let aiShot=false;
 function aiDiveSk(u,y){if(y>0.02&&!has(uSk(u),'hidive')){u.diveSpd=6;u.diveDur=0.3;u.diveRecT=1.0;u.diveT=0.3;u.down=1.6;if(u.vy>-5)u.vy=-5;return} // 空中ダイブは減衰（ハイダイブ持ちは除く）
-  if(has(uSk(u),'longdive')&&!(y>0.02)){u.diveSpd=DIVE_SP*1.15;u.diveDur=DIVE_T*1.1;u.diveT=u.diveDur;u.down=u.diveDur+DIVE_REC+0.3}}
+  if(has(uSk(u),'longdive')&&!(y>0.02)){u.diveSpd=DIVE_SP*1.15;u.diveDur=DIVE_T*1.1;u.diveT=u.diveDur;u.down=u.diveDur+DIVE_REC+0.3}
+  if(has(uSk(u),'quickdive')&&u.qdT>0&&!(y>0.02)){u.diveRecT=DIVE_REC*0.6;u.diveCD*=0.5;u.down=(u.diveT||DIVE_T)+u.diveRecT+0.3}}
 function msBadge(){const e=document.getElementById('msSmall');if(!e)return;const n=msReadyAll();e.textContent='🪙 '+sv.coins+(n?'　🔔 受け取れる報酬 '+n+'件':'　デイリー・ウィークリー・実績');if(window.gcSmall)window.gcSmall();if(window.sqSmall)window.sqSmall()}
 function renderCard(){
   const el=document.getElementById('cardBox');if(!el)return;
+  if(mode==='tut'){el.style.display='none';return}
   if(!squadOn){if(net.role&&mode==='match'){el.style.display='';el.style.setProperty('--tc','#8fb4ff');el.innerHTML='<div class="cdHead"><div class="cdOvr" style="font-size:22px;font-style:normal;-webkit-text-stroke:0;color:#cfe0ff">基準</div><div><div class="cdName">全員 同じ能力</div><div class="cdSub">'+POS[net.role==='guest'?Math.max(0,net.myRole):playerRole][0]+'</div></div></div><div style="font-size:12px;opacity:.8;line-height:1.6">オンライン対戦は公平のため、スカッドやスキルは使わず全員が基準の能力で戦います。</div>'}else el.style.display='none';return}
   const pr=net.role==='guest'?Math.max(0,net.myRole):playerRole,prac=mode!=='match',c=prac?pracCard():sqCard(pr),t=c.tier===4?[0,'レジェンド','#ffd23f']:tierOf(c.ovr);el.style.display='';el.style.setProperty('--tc',t[2]);
   el.innerHTML='<div class="cdHead"><div class="cdOvr">'+c.ovr+'</div><div><div class="cdName">'+c.name+'</div><div class="cdSub">'+(prac?'練習　'+ROLE_N[c.role]:POS[pr][0]+(c.pen?'（不適正 -'+Math.round((1-c.pen)*100)+'%）':''))+'　<b>'+t[1]+'</b></div></div></div>'
@@ -1165,7 +1250,9 @@ const BN=[ // ガチャの種類。rates=[ノーマル,レア,SR,スペシャル
   {id:'s1',n:'スペシャルガチャ',one:150,ten:1350,pity:50,rates:[54,28,14,4],sp:1,pickRate:1,tx:'ピックアップ選手',pick:[]},
  {id:'s2',n:'レジェンドガチャ Vol.1',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_kino','L_shieki','L_shibata']},
  {id:'s3',n:'レジェンドガチャ Vol.2',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_sweeney','L_persson','L_carmack']},
- {id:'s4',n:'レジェンドガチャ Vol.3',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_kaneko','L_fukuda','L_tsukiyama']}]; // sp=スペシャルの出るガチャ。pick=ピックアップ選手のID。pickRate=スペシャルのうちピックアップから出る割合(1=100%)。ガチャを増やすときはこの配列に1つ足す
+ {id:'s4',n:'レジェンドガチャ Vol.3',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_kaneko','L_fukuda','L_tsukiyama']},
+ {id:'s5',n:'レジェンドガチャ Vol.4',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_fujita','L_sakauchi','L_oda']},
+ {id:'s6',n:'レジェンドガチャ Vol.5',one:200,ten:1800,pity:60,rates:[55,28,14,3],sp:1,pickRate:1,tx:'レジェンド選手',topN:'レジェンド',pick:['L_kuji','L_suzuki','L_maeda','L_yamakawa']}]; // sp=スペシャルの出るガチャ。pick=ピックアップ選手のID。pickRate=スペシャルのうちピックアップから出る割合(1=100%)。ガチャを増やすときはこの配列に1つ足す
 const TIER_I=[0,1,2,3],TIER_R=[[62,69],[70,79],[80,89],[90,96]],TIER_N=['ノーマル','レア','スーパーレア','スペシャル','レジェンド'],TIER_C=['#b7bfd0','#5ec8ff','#ff8c1a','#ff4dd8','#ffd23f']; // SRはオレンジ、レジェンドは金＋虹色の枠で見分ける
 const tierIdx=o=>o>=90?3:o>=80?2:o>=70?1:0;
 const SUR=['佐藤','鈴木','高橋','田中','伊藤','渡辺','山本','中村','小林','加藤','吉田','山田','佐々木','山口','松本','井上','木村','林','斎藤','清水'];
@@ -1192,7 +1279,10 @@ const LEGEND_FREE=false; // true にすると、レジェンドを最初から�
 const mkLeg=(id,name,role,skill,a)=>{const st={spd:a[0],sta:a[1],thr:a[2],pas:a[3],dive:a[4],gk:a[5],phy:a[6]};return{id,name,role,st,ovr:calcOvr(role,st),tier:4,skill,legend:true}};
 const LEGENDS=[mkLeg('L_kino','喜納 侑哉',1,'hidive',[96,96,90,94,99,40,99]),mkLeg('L_shieki','ヒ・シエキ',0,'longcatch',[90,92,92,94,99,99,95]),mkLeg('L_shibata','柴田 拓海',4,'bird',[98,92,99,92,95,40,94]),
   mkLeg('L_sweeney','ティム・スウィーニー',2,'buildup',[94,97,92,99,92,40,94]),mkLeg('L_persson','マルクス・ペルソン',2,'buildup',[92,98,94,98,90,40,96]),mkLeg('L_carmack','ジョン・カーマック',1,'longdive',[96,96,90,92,99,40,99]),
-  mkLeg('L_kaneko','金子 健太郎',4,'blitz magnet',[102,96,104,98,94,40,96]),mkLeg('L_fukuda','福田 理人',4,'bullet aggressive',[98,94,106,92,100,40,102]),mkLeg('L_tsukiyama','築山 まさお',1,'buildup longdive',[98,100,92,96,106,40,104])];
+  mkLeg('L_kaneko','金子 健太郎',4,'blitz magnet',[102,96,104,98,94,40,96]),mkLeg('L_fukuda','福田 理人',4,'bullet aggressive',[98,94,106,92,100,40,102]),mkLeg('L_tsukiyama','築山',1,'buildup longdive',[98,100,92,96,106,40,104]),
+  mkLeg('L_fujita','藤田 悠叶',1,'quickdive',[76,92,90,90,92,40,112]),mkLeg('L_sakauchi','阪内',2,'technician',[95,96,100,108,94,40,88]),mkLeg('L_oda','小田 ペン次郎',2,'intimidate',[92,94,94,94,92,40,58]),
+  mkLeg('L_kuji','久慈 大翔',4,'ego',[100,92,108,90,95,40,96]),mkLeg('L_suzuki','鈴木 イッペイ',0,'vgpass longcatch',[84,92,96,104,98,106,92]),mkLeg('L_maeda','前田 理央',2,'tease',[98,96,88,92,98,40,78]),
+  mkLeg('L_yamakawa','山川 剛',2,'longdive',[100,92,84,86,92,40,82])];
 for(const c of LEGENDS){CARDS[c.id]=c;if(LEGEND_FREE&&sv.inv[c.id]===undefined)sv.inv[c.id]=1}
 // ---- スカッド（スロット→カードID。保存される）----
 const SLOT_ROLE=[0,1,2,2,4],SLOT_NAME=['GK','CB','MF 左','MF 右','CF'];
@@ -1233,7 +1323,7 @@ function gcPull(n,bi){ // n回引く。コインが足りなければ null
   sv.pulls=(sv.pulls||0)+n;svSave();return out;
 }
 const b0sp=b=>!!b.sp;
-const SKILLS={hidive:{n:'ハイダイブ',d:'ジャンプ後のダイブでも、勢い・距離・時間が落ちない（空中でも通常ダイブと同じ）'},longcatch:{n:'ロングキャッチ',d:'ボールを取れる範囲（拾う扇の半径・ダイブキャッチ）が約1.4倍に広がる'},buildup:{n:'ビルドアップ',d:'パスがブレずに正確になり、味方からのパスを受けられる範囲も約1.5倍に広がる'},longdive:{n:'ロングリーチダイブ',d:'ダイブの飛距離が約1.5倍に伸びる'},bird:{n:'ピジョンストライク',d:'シュートにドライブ回転がかかり、ボールが鋭く落ちる軌道になる'},blitz:{n:'ブリッツカーブ',d:'右に進みながら打てば右に、左に進みながら打てば左に曲がるシュート（横に動くほど大きく曲がる）'},magnet:{n:'マグネットフィート',d:'ボールを拾う・受ける範囲が広がり、拾い直しも早くなる（キャッチとタッチが上手くなる）'},bullet:{n:'バレットハンド',d:'空中でシュートすると、速くて落ちにくい鋭く強いボールになる'},aggressive:{n:'アグレッシブシュート',d:'ジャンプ中・ダイブ中にボールを持ってチャージすると溜まりが速い（ジャンプ中×1.5、ダイブ中×2）'}};
+const SKILLS={hidive:{n:'ハイダイブ',d:'ジャンプ後のダイブでも、勢い・距離・時間が落ちない（空中でも通常ダイブと同じ）'},longcatch:{n:'ロングキャッチ',d:'ボールを取れる範囲（拾う扇の半径・ダイブキャッチ）が約1.4倍に広がる'},buildup:{n:'ビルドアップ',d:'パスがブレずに正確になり、味方からのパスを受けられる範囲も約1.5倍に広がる'},longdive:{n:'ロングリーチダイブ',d:'ダイブの飛距離が約1.5倍に伸びる'},bird:{n:'ピジョンストライク',d:'シュートにドライブ回転がかかり、ボールが鋭く落ちる軌道になる'},blitz:{n:'ブリッツカーブ',d:'右に進みながら打てば右に、左に進みながら打てば左に曲がるシュート（横に動くほど大きく曲がる）'},magnet:{n:'マグネットフィート',d:'ボールを拾う・受ける範囲が広がり、拾い直しも早くなる（キャッチとタッチが上手くなる）'},bullet:{n:'バレットハンド',d:'空中でシュートすると、速くて落ちにくい鋭く強いボールになる'},quickdive:{n:'クイックネスダイブ',d:'ボールを奪った（持った）あと3秒間、ダイブのクールタイムが半分、倒れている時間が約6割になる'},technician:{n:'テクニシャン',d:'自分が投げたボールが自分の前方の扇に入ると、右クリックなしで自動的に回収する'},ego:{n:'エゴイスト',d:'ボールを持っているとエゴイストメーターが上がり、スピード・シュート力・ダイブなどの能力が上がり、左クリックのチャージも速く、鋭い弾道になる。ボールを持てないとメーターが下がり、スピードやシュート力が大きく落ちる（0が通常。±100）。自分のシュートでゴールを決めると、12秒間メーターが80から落ちなくなる'},vgpass:{n:'ヴァーティカルグラウンダーパス',d:'溜め切らないパスが、鋭く速い（最低でも強めの速さ）正確な地を這うボールになる（フルチャージのシュートは通常どおり）'},tease:{n:'ティーズ',d:'周囲8mにいる相手チームの選手を からかって、パス精度とシュート力を落とす'},intimidate:{n:'インティミデイティング パーソン',d:'周囲7mにいる選手は、敵味方を問わずパスの精度とシュートの決定力が落ちる（本人は影響なし）'},aggressive:{n:'アグレッシブシュート',d:'ジャンプ中・ダイブ中にボールを持ってチャージすると溜まりが速い（ジャンプ中×1.5、ダイブ中×2）'}};
 const skList=c=>c&&c.skill?c.skill.split(' ').filter(k=>SKILLS[k]):[];
 const skillHTML=c=>skList(c).map(k=>'<div class="skBox"><b>⚡ 特殊スキル：'+SKILLS[k].n+'</b><span>'+SKILLS[k].d+'</span></div>').join('');
 function cardHTML(c,extra,i){const t=c.tier!==undefined?c.tier:tierIdx(c.ovr),pos=c.role===0?'GK':c.role===1?'CB':c.role===2?'MF':'CF';
@@ -1293,19 +1383,85 @@ function shotFx(sk,p,lat,air,k){ // 特殊シュートの効果をボールに�
   if(has(sk,'blitz')&&Math.abs(lat)>1.2)ball.curve=Math.max(-1,Math.min(1,lat/4.5))*k;
   if(has(sk,'bullet')&&air){mul=1+0.3*k;ball.flat=0.6*k}
   return mul}
+/* ===== 実戦チュートリアル（mode==='tut'）===== */
+const TUT={i:0,wait:0,ly:0,yawSum:0,lp:null,dist:0,pg:true,ph:false,pd:false,base:0,lt:0,lch:0,dir:1,t0:0,done:false,el:null};
+const tutFront=(k)=>({x:player.pos.x-Math.sin(player.yaw)*k,z:player.pos.z-Math.cos(player.yaw)*k});
+function tutBall(){const f=tutFront(3);ball.ai=null;ball.held=false;ball.p.set(f.x,R,f.z);ball.v.set(0,0,0);ball.team=null;ball.byPlayer=false;ball.passTo=null;ball.passToPlayer=false;ball.grd=false;ball.flat=0;ball.curve=0;ball.drive=0}
+function tutLaunch(){ // 横からボールを飛ばす（ダイブで止める練習）
+  const yaw=player.yaw,fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=Math.cos(yaw),rz=-Math.sin(yaw),D=9,spd=10+Math.random()*2.5,t=D/spd;
+  TUT.dir=-TUT.dir;const off=(1.9+Math.random()*1.1)*TUT.dir;
+  const sx=player.pos.x+fx*D,sz=player.pos.z+fz*D,tx=player.pos.x+rx*off,tz=player.pos.z+rz*off;
+  const dx=tx-sx,dz=tz-sz;ball.ai=null;ball.held=false;ball.p.set(sx,1.2,sz);ball.v.set(dx/t,(1.0-1.2+9*t*t)/t,dz/t);
+  ball.team='R';ball.byPlayer=false;ball.passTo=null;ball.passToPlayer=false;ball.grd=false;ball.flat=0;ball.curve=0;ball.drive=0;TUT.lt=0}
+const TUT_STEPS=[
+ {t:'視点を動かそう',d:'<b>マウス</b>を動かして、まわりを見回してみよう。',chk:()=>TUT.yawSum>3},
+ {t:'歩いてみよう',d:'<b>W A S D</b> で動ける。コートの中を歩き回ろう。',chk:()=>TUT.dist>10},
+ {t:'ダッシュ',d:'<b>Q</b> を押している間はダッシュ。スタミナ（下のバー）を使うから、少し減るまで走ってみよう。',chk:()=>stam<0.7},
+ {t:'ジャンプ',d:'<b>Space</b> でジャンプ。',chk:()=>!player.ground},
+ {t:'ボールを拾う',d:'目の前のボールに近づいて <b>右クリック</b>。前方の扇形の範囲のボールを拾える。<br>持てるのは最大<b>2秒</b>。',enter:tutBall,chk:()=>ball.held},
+ {t:'投げる',d:'<b>左クリックを長押し</b>でパワーをため、はなすと投げる。ちょん押しは前に転がす。<br>ゴールの方向（正面）へ投げてみよう。',chk:()=>TUT.thrown},
+ {t:'ゴールを決めよう',gw:3.8,d:'ボールを拾って、<b>どちらのゴールでもいい</b>から投げ入れよう。<br>見失ったらボールを手元に戻してあげる。',enter:()=>{TUT.a0=TUT.evA||0;tutBall()},chk:()=>(TUT.evA||0)>TUT.a0},
+ {t:'ダイブを使おう【必須】',d:'<b>Shift</b> で前に飛び込む「ダイブ」。<b>進みたい方向キーを押しながら</b>使おう。<br>飛んでくるボールを止める大事な技！',must:1,chk:()=>TUT.dived},
+ {t:'ダイブ練習：ボールを止めよう【必須】',d:'ボールが横から飛んでくる！<b>ボールの方向に動きながら Shift</b> でダイブして、キャッチしよう。<br><b>3回</b>キャッチできたらクリア。右・左と、くり返し飛んでくる。',must:1,enter:()=>{TUT.cnt=0;TUT.cg=false;TUT.rl=0;tutLaunch()},chk:()=>TUT.cnt>=3},
+ {t:'ダイブ練習：押し出してすぐ拾う【必須】',d:'ボールを持って、<b>左クリックをちょん押し</b>で前に転がす。すぐ <b>Shift</b> でダイブして、自分で押し出したボールを<b>ダイブで拾おう</b>！<br><b>3回</b>成功したらクリア。',must:1,enter:()=>{TUT.cnt=0;TUT.tt=0;TUT.lz=0;tutHand()},chk:()=>TUT.cnt>=3},
+ {t:'実戦：1対1',d:'相手のCFが出てきた！ボールを拾って、かわして決めよう。<br>ボールを持った相手には近づいて <b>右クリック</b> で叩き落とせる。ゴールしたら完了！',enter:()=>{TUT.b0=TUT.evB||0;tutBall();const d=redAll.find(x=>x.userData.role===4);if(d){setInScene(d,true);const h=formHome('R',4);d.position.set(h.x,0,h.z)}},chk:()=>(TUT.evB||0)>TUT.b0}];
+function tutUi(){
+  if(!TUT.el){TUT.el=document.createElement('div');TUT.el.style.cssText='position:fixed;left:50%;top:92px;transform:translateX(-50%);width:min(560px,92vw);z-index:40;pointer-events:none;background:rgba(10,16,40,.88);border:2px solid #7fd0ff;border-radius:14px;padding:12px 18px;color:#fff;font:15px/1.6 sans-serif;text-shadow:0 1px 3px #000;box-shadow:0 6px 20px rgba(0,0,0,.5)';document.body.appendChild(TUT.el)}
+  const on=mode==='tut'&&matchStarted;TUT.el.style.display=on?'':'none';if(!on)return;
+  const n=TUT_STEPS.length,st=TUT_STEPS[TUT.i];
+  let h;if(TUT.done)h='<div style="font-size:22px;font-weight:900;color:#ffd23f">🎉 チュートリアル完了！</div><div>これで基本は完璧。<b>ESC</b> でメニューにもどって、練習・AIリーグ・試合に挑戦しよう。</div>';
+  else h='<div style="font-size:12px;color:#7fd0ff;font-weight:700;letter-spacing:.1em">STEP '+(TUT.i+1)+' / '+n+(TUT.wait>0?'　✅ OK!':'')+((TUT.i===8||TUT.i===9)?'　成功 '+(TUT.cnt||0)+' / 3':'')+'</div><div style="font-size:21px;font-weight:900;margin:2px 0 4px">'+st.t+'</div><div>'+st.d+'</div>'+(st.must?'':'<div style="font-size:12px;opacity:.7;margin-top:4px">（Nキーでこのステップをスキップ）</div>');
+  if(TUT.h!==h){TUT.h=h;TUT.el.innerHTML=h}}
+function tutHand(){ball.ai=null;ball.held=true;ball.team=null;ball.byPlayer=false;ball.passTo=null;ball.passToPlayer=false;ball.grd=false;ball.flat=0;ball.curve=0;ball.drive=0;ball.v.set(0,0,0);player.holdT=0;holdGrace=0.6}
+function tutNext(){if(TUT.done)return;TUT.i++;TUT.wait=0;TUT.grace=1.0;TUT.yawSum=0;TUT.dist=0;TUT.thrown=false;TUT.dived=false;if(TUT.i>=TUT_STEPS.length){TUT.done=true;msg('チュートリアル完了！');return}const st=TUT_STEPS[TUT.i];if(st.enter)st.enter()}
+function tutArm(){TUT.i=-1;TUT.done=false;TUT.h='';TUT.lp=null;TUT.t0=0;TUT.loose=0;TUT.dir=1;tutNext();TUT.i=0;TUT.yawSum=0;TUT.dist=0}
+function tutUpdate(dt,playing){
+  tutUi();if(!playing||TUT.done)return;
+  if(TUT.lp===null){TUT.lp={x:player.pos.x,z:player.pos.z};TUT.ly=player.yaw}
+  {const dy=Math.atan2(Math.sin(player.yaw-TUT.ly),Math.cos(player.yaw-TUT.ly));TUT.yawSum+=Math.abs(dy);TUT.ly=player.yaw;TUT.dist+=Math.hypot(player.pos.x-TUT.lp.x,player.pos.z-TUT.lp.z);TUT.lp.x=player.pos.x;TUT.lp.z=player.pos.z}
+  if(TUT.ph&&!ball.held&&ball.byPlayer&&ball.v.length()>3){TUT.thrown=true;TUT.tt=3.5}
+  const h9=TUT.hh;TUT.hh=ball.held;TUT.ph=ball.held;
+  if(diveT>0&&!TUT.pd)TUT.dived=true;TUT.pd=diveT>0;
+  if(TUT.wait>0){TUT.wait-=dt;if(TUT.wait<=0)tutNext();return}
+  const st=TUT_STEPS[TUT.i];
+  if(TUT.grace>0){TUT.grace-=dt}else if(st.chk()){TUT.wait=st.gw||1.1;sfx.pick();msg('OK！');return}
+  if(TUT.i===8){ // ダイブ練習: 3回キャッチするまで、くり返し飛ばす
+    if(TUT.rl>0){TUT.rl-=dt;if(TUT.rl<=0){TUT.cg=false;tutLaunch()}}
+    else if(ball.held&&diveHit&&!TUT.cg){TUT.cnt++;TUT.cg=true;sfx.pick();msg('キャッチ！ '+TUT.cnt+' / 3');if(TUT.cnt<3){TUT.rl=1.0;ball.held=false;ball.team=null;ball.p.set(player.pos.x,5,player.pos.z);ball.v.set(0,0,0);ball.p.y=R}}
+    else{TUT.lt+=dt;if(!ball.held&&!ball.ai&&TUT.lt>2.2)tutLaunch();if(ball.held&&!diveHit)tutLaunch()}}
+  if(TUT.i===9){ // 押し出しダイブ: 転がして、すぐダイブで自分で拾う
+    if(TUT.tt>0)TUT.tt-=dt;
+    if(ball.held&&!h9&&TUT.tt>0&&(diveT>0||diveRec>0)){TUT.cnt++;TUT.tt=0;sfx.pick();msg('ナイス！ '+TUT.cnt+' / 3')}
+    else if(ball.held&&!h9&&TUT.tt>0){TUT.tt=0;msg('ダイブで拾おう！（Shift）')}
+    if(!ball.held&&!ball.ai&&TUT.tt<=0&&ball.v.length()<1.5){TUT.lz+=dt;if(TUT.lz>1.2){TUT.lz=0;tutHand();msg('もう一度！ボールを渡したよ')}}else TUT.lz=0}
+  if(TUT.i>=4&&TUT.i!==8&&TUT.i!==7&&TUT.i!==9&&!ball.held&&!ball.ai&&phase==='play'&&resetTimer<=0){ // ボールを見失ったら手元に戻す
+    if(ball.v.length()<1&&Math.hypot(ball.p.x-player.pos.x,ball.p.z-player.pos.z)>7)TUT.loose+=dt;else TUT.loose=0;
+    if(TUT.loose>2){TUT.loose=0;tutBall();msg('ボールを手元に戻したよ')}}
+}
+addEventListener('keydown',e=>{if(mode==='tut'&&matchStarted&&e.code==='KeyN'&&!TUT.done){const st=TUT_STEPS[TUT.i];if(st&&!st.must&&TUT.wait<=0)tutNext()}});
+let egoEl=null;
+function egoUi(on){ // エゴイストメーター（画面中央下）
+  if(!egoEl){if(!on)return;egoEl=document.createElement('div');egoEl.style.cssText='position:fixed;left:50%;bottom:150px;transform:translateX(-50%);width:260px;z-index:30;pointer-events:none;font:700 13px/1.2 sans-serif;color:#fff;text-align:center;text-shadow:0 1px 3px #000';egoEl.innerHTML='EGO <b></b><div style="position:relative;height:12px;margin-top:3px;background:rgba(0,0,0,.55);border:2px solid #fff;border-radius:8px;overflow:hidden"><i style="position:absolute;top:0;bottom:0"></i><u style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff"></u></div>';document.body.appendChild(egoEl)}
+  egoEl.style.display=(on&&matchStarted&&locked)?'':'none';if(!on||!matchStarted)return;
+  const m=egoM/100,bar=egoEl.querySelector('i');egoEl.querySelector('b').textContent=(egoM>=0?'+':'')+Math.round(egoM)+(egoT>0?' 🔒'+Math.ceil(egoT)+'s':'');
+  bar.style.left=(m>=0?50:50+m*50)+'%';bar.style.width=Math.abs(m)*50+'%';bar.style.background=m>=0?'#ffd23f':'#5a8cff'}
+const INT_R=7;let INT=[],INTp=false;
+function intimUpdate(){INT.length=0;INTp=has(PSK,'intimidate');const pr=net.role==='guest'?-9:playerRole;for(const d of ORDER){const u=d.userData;if(u.human||!d.visible||(u.team==='B'&&u.role===pr))continue;if(has(uSk(u),'intimidate'))INT.push(d)}}
+function intimNear(x,z,selfD){for(const d of INT){if(d===selfD)continue;if(Math.hypot(d.position.x-x,d.position.z-z)<INT_R)return true}return !!selfD&&INTp&&Math.hypot(player.pos.x-x,player.pos.z-z)<INT_R}
 // AIがボールを投げる（目標に届く放物線を計算。errが大きいほど狙いが雑、spが小さいほどゆっくり）
 function aiThrow(d,tx,tz,err,sp){
   const u=d.userData,sx=d.position.x,sz=d.position.z;
   const sk=uSk(u);
-  tx+=(Math.random()-0.5)*err*lvk(u.team,'err',1)*mm(u).aim*((!aiShot&&has(sk,'buildup'))?0.6:1); // ビルドアップ: パスのブレが小さい
+  const itm=intimNear(sx,sz,d);tx+=(Math.random()-0.5)*err*lvk(u.team,'err',1)*mm(u).aim*((!aiShot&&(has(sk,'buildup')||has(sk,'vgpass')))?0.6:1)*(itm?2.2:1)*(teaseNear(sx,sz,u.team)?1.8:1); // ビルドアップ: パスのブレが小さい
   const dx=tx-sx,dz=tz-sz,D=Math.hypot(dx,dz)||1,t=Math.max(0.35,D/(sp||20));
   let vx=dx/t*1.04,vy=(1.0-1.2+9*t*t)/t,vz=dz/t*1.04;
-  {const s0=Math.hypot(vx,vy,vz),mxs=(7+26)*mm(u).thr;if(s0>mxs){const k=mxs/s0;vx*=k;vy*=k;vz*=k}} // シュート力が低いと届く強さに上限
+  {const s0=Math.hypot(vx,vy,vz),mxs=(7+26)*mm(u).thr*(itm?0.85:1)*(teaseNear(sx,sz,u.team)?0.9:1);if(s0>mxs){const k=mxs/s0;vx*=k;vy*=k;vz*=k}} // シュート力が低いと届く強さに上限
   const pw=Math.max(0,Math.min(1,(Math.hypot(vx,vy,vz)-7)/26)); // プレイヤーと同じ式: 速さ=7+26*溜め
   if(u.charge<pw){u.charging=true;return false} // 足りない間は溜め続ける
-  ball.ai=null;ball.byPlayer=false;ball.team=u.team;ball.tid=(ball.tid||0)+1;ball.passTo=null;ball.passToPlayer=false;ball.selfPush=false;
+  ball.ai=null;ball.byPlayer=false;ball.team=u.team;ball.tid=(ball.tid||0)+1;ball.thrBy=d;ball.thrTid=ball.tid;ball.passTo=null;ball.passToPlayer=false;ball.selfPush=false;
   ball.p.set(sx+dx/D*0.7,1.2,sz+dz/D*0.7);
-  ball.v.set(vx,vy,vz);ball.drive=0;ball.curve=0;ball.flat=0;if(aiShot)ball.v.multiplyScalar(shotFx(sk,pw,latOf(u.vel.x,u.vel.z,dx,dz),d.position.y>0.3,0.6)); // 特殊シュート（AIは弱め）
+  ball.v.set(vx,vy,vz);ball.drive=0;ball.curve=0;ball.flat=0;ball.grd=false;if(has(sk,'vgpass')&&!aiShot&&pw<0.85){ball.p.y=R;ball.v.y=0;ball.grd=true;{const sp=Math.hypot(ball.v.x,ball.v.z);if(sp>0.1&&sp<20)ball.v.multiplyScalar(20/sp)}} // ヴァーティカルグラウンダーパス
+  if(aiShot)ball.v.multiplyScalar(shotFx(sk,pw,latOf(u.vel.x,u.vel.z,dx,dz),d.position.y>0.3,0.6)); // 特殊シュート（AIは弱め）
   u.cd=0.8;u.holdT=0;u.charge=0;u.charging=false;u.boostT=(pw<0.4?0.15:0.7);sfx.throw(pw);
   return true;
 }
@@ -1447,7 +1603,8 @@ function remoteThrow(d,u,I){
   if(kk&&dir.z<0)dir.z=-dir.z; // 赤の攻める向きは−Z。キックオフは後ろ（＋Z）へ
   dir.normalize();
   ball.ai=null;ball.p.set(d.position.x+dir.x*0.7,d.position.y+EYE+dir.y*0.7,d.position.z+dir.z*0.7);
-  const fxm=shotFx(hSk(u),pw,latOf(u.vel.x,u.vel.z,dir.x,dir.z),d.position.y>0.3,1);
+  const itg=intimNear(d.position.x,d.position.z,d);if(itg){dir.x+=(Math.random()-0.5)*0.16;dir.z+=(Math.random()-0.5)*0.16;dir.normalize()}
+  const fxm=shotFx(hSk(u),pw,latOf(u.vel.x,u.vel.z,dir.x,dir.z),d.position.y>0.3,1)*(itg?0.85:1);
   ball.v.copy(dir).multiplyScalar((7+26*pw)*fxm);ball.v.x+=u.vel.x*0.5;ball.v.z+=u.vel.z*0.5;
   ball.byPlayer=false;ball.team=u.team;ball.passTo=null;ball.passToPlayer=false;ball.pgrace=0.3;ball.tid=(ball.tid||0)+1;ball.passTid=ball.tid;
   ball.selfPush=false;
@@ -1691,7 +1848,7 @@ function aiUpdate(dt){
       if(loose()&&u.cd<=0&&!(T==='R'&&ball.passToPlayer&&ball.passTid===ball.tid&&performance.now()<(ball.ownUntil||0))){ // 拾う（あなたが軽く押し出したボールは0.7秒間、赤は拾えない）
         const dd=Math.hypot(ball.p.x-pos.x,ball.p.z-pos.z),sp=ball.v.length();
         const isK=u.role===0;
-        const sk=uSk(u),kR=(has(sk,'longcatch')?1.2:(has(sk,'buildup')&&(ball.team===T||ball.passTo===d))?1.25:1)*(has(sk,'magnet')?1.15:1); // ロングキャッチ/ビルドアップ: 取れる範囲が少し広い
+        const sk=uSk(u),kR=(has(sk,'longcatch')?1.2:(has(sk,'buildup')&&(ball.team===T||ball.passTo===d))?1.25:1)*(has(sk,'magnet')?1.15:1)*(has(sk,'technician')&&ball.thrBy===d&&ball.thrTid===ball.tid?1.6:1); // ロングキャッチ/ビルドアップ: 取れる範囲が少し広い
         let ok=dd<(isK?1.3:1.1)*kR+(u.diveT>0?0.7*(has(sk,'longcatch')?1.2:1):0)&&ball.p.y<(isK?2.4:1.7)+pos.y;
         if(ok&&ball.team&&ball.team!==T&&sp>=9&&!(u.diveT>0&&sp<18)){ // 相手の速いシュート: キーパーだけが確率で止められる
           if(isK){if(u.saveId!==ball.tid){u.saveId=ball.tid;u.saveOK=Math.random()<lvk(u.team,'save',mm(u).save)}ok=u.saveOK}else ok=false;
@@ -1730,6 +1887,7 @@ function aiUpdate(dt){
     }
     {const sx=pos.x-player.pos.x,sz=pos.z-player.pos.z,sd=Math.hypot(sx,sz);
      if(sd<0.8&&sd>0.001){const pp=(0.8-sd)*0.5;pos.x+=sx/sd*pp;pos.z+=sz/sd*pp}}
+    if(has(uSk(u),'quickdive')){const h=ball.ai===d;if(h&&!u.qdPrev)u.qdT=3;u.qdPrev=h;if(u.qdT>0)u.qdT-=dt}
     if(u.diveCD>0)u.diveCD-=dt;if(u.down>0)u.down-=dt;if(u.diveT>0)u.prot=0.2;else if(u.prot>0)u.prot-=dt;
     if(!H&&!stunned&&u.diveT<=0&&u.diveCD<=0&&loose()&&ball.team&&ball.team!==T&&u.diveId!==ball.tid){ // ダイビングでパスカット
       const bx=ball.v.x,bz=ball.v.z,s2=bx*bx+bz*bz;
@@ -1880,7 +2038,7 @@ function msg(t){toast.textContent=t;toast.style.opacity=1;clearTimeout(setSens.t
 function newMatch(){ // 点数・時間・配置を最初に戻す
   kickTeam=null;phase='play';goalLog.length=0;resetStats();aiLv=(leagueMatch&&mode==='match'&&!net.role)?LG[lg.div]:null;dvCnt=0;
   score.b=0;score.r=0;$('sb').textContent=0;$('sr').textContent=0;
-  half=1;matchT=MATCH_SEC;matchOver=false;fireTimer=0;htOn=false;w30=w10=false;net.pz={h:PZ_MAX,g:PZ_MAX};net.gPz=false;net.entered=false;resetRound();
+  egoM=0;egoT=0;half=1;matchT=MATCH_SEC;matchOver=false;fireTimer=0;htOn=false;w30=w10=false;net.pz={h:PZ_MAX,g:PZ_MAX};net.gPz=false;net.entered=false;resetRound();
 }
 function tmWarn(mt,hh){ // 残り30秒・10秒のお知らせ（前半・後半どちらも）
   if(mode!=='match'||!matchStarted||matchOver||htOn)return;
@@ -1898,7 +2056,7 @@ function pzUi(G){ // オンラインのポーズ残り時間の表示
   const me=G?v[1]:v[0],op=G?v[0]:v[1],opOn=G?v[2]:v[3],meOn=G?v[3]:v[2];
   const t='⏸ ポーズ残り　あなた '+Math.max(0,me)+'秒 ／ 相手 '+Math.max(0,op)+'秒';
   if(hud.textContent!==t)hud.textContent=t;hud.style.display='';hud.style.color=me<=10?'#ff6b6b':'#fff';
-  if(opOn&&!htOn){const b='相手が一時停止中…（相手の残りポーズ時間 '+Math.max(0,op)+'秒）';if(ban.textContent!==b)ban.textContent=b;ban.style.display=''}else ban.style.display='none';
+  if(opOn&&!htOn){const b='相手が一時停止中…（相手の残りポーズ時間 '+Math.max(0,op)+'秒）　再開まで動けません';if(ban.textContent!==b)ban.textContent=b;ban.style.display=''}else ban.style.display='none';
   if(meOn&&!htOn&&!locked){const m='一時停止中　ポーズ残り '+Math.max(0,me)+'秒（0秒で反則負け！）　クリックで再開';if($('startMsg').textContent!==m)$('startMsg').textContent=m}
 }
 function enterHtUi(){ // ハーフタイム画面（スタート画面を流用: ポジション・スカッド変更ができる）
@@ -1985,7 +2143,7 @@ POS.forEach(([name,r])=>{
 });
 for(const t of[0,1]){const g=document.createElement('div');g.className='gl';g.style[t?'bottom':'top']='0';posBox.appendChild(g)}
 for(let r=0;r<5;r++){const o=document.createElement('div');o.className='opp';o.dataset.opp=r;posBox.appendChild(o)}
-const MODE_TXT={match:['ポジションを選んで「試合開始」','試合開始'],free:['フリー練習：ひとりで自由に動こう','練習開始'],'1v1':['1v1練習：AI 1体とゴール前の1対1','練習開始'],gk1v1:['GKと1v1練習：相手キーパーのゴール（＋Z）を狙おう','練習開始']};
+const MODE_TXT={match:['ポジションを選んで「試合開始」','試合開始'],free:['フリー練習：ひとりで自由に動こう','練習開始'],'1v1':['1v1練習：AI 1体とゴール前の1対1','練習開始'],gk1v1:['GKと1v1練習：相手キーパーのゴール（＋Z）を狙おう','練習開始'],tut:['チュートリアル：実際に動かしながら基本を覚えよう','チュートリアル開始']};
 function showStartFor(){
   $('startMsg').textContent=MODE_TXT[mode][0];$('startBtn').textContent=MODE_TXT[mode][1];
   posBox.style.display=mode==='match'?'':'none';$('formTxt').style.display=mode==='match'?'':'none';
@@ -2070,6 +2228,7 @@ setPlayerRole(playerRole);refreshPos();
       +'<div class="plInfo">能力値の色：<b style="color:#3fe0ff">101以上 水色</b>　<b style="color:#5ee08a">91〜100 緑</b>　<b style="color:#ff9a3c">80〜90 オレンジ</b>　<b style="color:#ff5a5a">79以下 赤</b></div>'
       +'<div class="plInfo">'+(sv.inv[c.id]?'所持 ×'+sv.inv[c.id]:'未所持')+(bn?'　／　入手：'+bn.n:(/^s\d$/.test(c.id)?'　／　初期選手':''))+'</div></div></div>'};
    const showModal=()=>{const c=sel&&CARDS[sel];if(!c)return;$('plDet').innerHTML=detail(c);$('plModal').style.display='flex';colorStats($('plDet'));const k=cur.findIndex(x=>x.id===sel);$('plPrev').style.visibility=k>0?'':'hidden';$('plNext').style.visibility=k>=0&&k<cur.length-1?'':'hidden'};
+   window.plOpen=(id,ids)=>{cur=(ids||[id]).map(i=>CARDS[i]).filter(Boolean);sel=id;showModal()}; // 他の画面からも選手の詳細（能力・スキル）を開く
    window.plClose=()=>{const m=$('plModal');if(m)m.style.display='none'};
    const step=d=>{const k=cur.findIndex(x=>x.id===sel),n=cur[k+d];if(n){sel=n.id;ui.click&&ui.click();showModal()}};
    const render=()=>{
@@ -2089,7 +2248,7 @@ setPlayerRole(playerRole);refreshPos();
   }
   plSmall();
 
-  $('mRules').addEventListener('click',()=>{showMain();$('menuMain').style.display='none';$('menuRules').style.display='';$('menuRules').classList.add('show');$('menu').classList.add('rulesOn')});
+  $('mRules').addEventListener('click',()=>{ui.click();window.openRules()});
   $('mRulesBack').addEventListener('click',()=>showMain());
   // ===== チュートリアル（ページ送り式の図解）=====
   {let pg=0;
@@ -2119,14 +2278,38 @@ setPlayerRole(playerRole);refreshPos();
      l:['ポジションは<b>GK1・CB1・MF2・CF1</b>。チームで守って攻めよう。','ゴールが決まると全員が初期位置に戻る。','再開は、点を取られたチームのCFから。笛のあとは<b>後ろ（自陣側）にだけ</b>パスできる。']},
     {t:'🎉 準備OK！練習で試そう',v:'<div class="tBig">GO!</div>',
      l:['まずは<b>フリー練習</b>でボールを拾って投げてみよう。','慣れたら、AIリーグや試合タブへ。','操作に迷ったら、メニューの「ルール説明」でいつでも見られる。'],go:1}];
-   const render=()=>{const P=PAGES(),p=P[pg];
+   const RPAGES=()=>[
+    {t:'🏆 勝ち方',v:court(me(80,150,'#2f7dff')+me(60,170,'#2f7dff')+me(100,170,'#2f7dff')+me(70,70,'#ff4d4d')+me(95,60,'#ff4d4d')+ball(80,140)+arrow(80,136,80,14)),
+     l:['<b>5対5</b>。ボールを<b>相手ゴールに投げ入れたら得点</b>。','試合は<b>前半3分＋後半3分</b>。合計で多く点を取ったチームの勝ち。','ポジションは <b>GK1・CB1・MF2・CF1</b>。AIもあなたと同じ能力。']},
+    {t:'🎮 操作',v:'<div class="tKeys"><div>'+key('W')+'</div><div>'+key('A')+key('S')+key('D')+'</div></div>'+mouse(1,1),
+     l:['<b>'+(kn('rK1')||'WASD')+'</b> 移動 ／ <b>'+(kn('rK2')||'Space')+'</b> ジャンプ ／ <b>マウス</b> 視点','<b>左クリック長押し</b>：溜めて投げる（長いほど強く速い）。ちょん押しは前に転がす','<b>右クリック</b>：ボールを拾う。ボールを持った相手には叩き落とす','<b>'+(kn('rK3')||'Shift')+'</b> ダイブ ／ <b>'+(kn('rK4')||'Q')+'</b> ダッシュ ／ <b>ESC</b> 一時停止']},
+    {t:'⏱ ボールを持つとき',v:'<div class="tTimer"><b>2.0</b><span>秒</span></div>',
+     l:['持てるのは<b>最大2秒</b>。超えると落としてしまう。','持っている間は少し遅くなり、投げた直後は一瞬加速する。','敵が前方の扇形に入ったら、右クリックで叩き落とせる。']},
+    {t:'💨 スタミナ（ダッシュ）',v:'<div class="tKeys"><div>'+key(kn('rK4')||'Q')+'<small>ダッシュ</small></div></div><div class="tCharge"><i></i></div><div class="tCap">約3秒で使い切る</div>',
+     l:['<b>'+(kn('rK4')||'Q')+'</b>を押している間、<b>1.35倍</b>の速さで走れる。約3秒で使い切る。','止まって（ダッシュをやめて）0.6秒後から回復。','使い切ると、<b>25%回復</b>するまでダッシュできない。','AIも同じスタミナで、追いかけるときなどにダッシュする。']},
+    {t:'🛡 ダイブ（パスカット）',v:court(me(50,120,'#2f7dff')+me(112,100,'#ff4d4d')+ball(100,100)+arrow(100,100,60,125,'#ff7a7a')+arrow(50,120,66,118,'#7be0ff')),
+     l:['前に飛び込んで、飛んでくるボールを止める。遅いボールは<b>キャッチ</b>、速いシュートは<b>弾く</b>。','ダイブ中と、終わってから0.2秒は<b>ボールを奪われない</b>。','終わると少し倒れて動けない。ジャンプ中に使うと、少し進んで倒れるだけ。','<b>押し出してダイブ</b>：ちょん押しで転がしたボールを、すぐダイブで自分で拾える。']},
+    {t:'🥅 キーパー（GK）',v:court(me(80,198,'#2f7dff')+ball(80,188)+'<text x="80" y="168" fill="#fff" font-size="9" text-anchor="middle">ペナルティエリア</text>'),
+     l:['自分のペナルティエリアの中では、GKは<b>ボールを奪われない</b>。','GKはシュートを止められる（確率）。上の部のAIほど、よく止める。']},
+    {t:'📣 得点・失点のあと',v:court(me(80,196,'#2f7dff')+me(80,150,'#2f7dff')+me(52,110,'#2f7dff')+me(108,110,'#2f7dff')+me(80,50,'#2f7dff')),
+     l:['ゴールが決まると演出が入り、全員が初期位置に戻って再開。','再開は<b>点を取られたチームのCF</b>から。','笛が鳴ってから、<b>後ろ（自陣側）にだけ</b>パスできる。']},
+    {t:'⏸ ハーフタイム・一時停止',v:'<div class="tBig" style="font-size:54px">40<small style="font-size:22px">秒</small></div>',
+     l:['前半が終わると<b>ハーフタイム（40秒）</b>。ポジション変更やスカッドの入れ替えができる。','両チームが「準備OK」を押すと後半スタート（40秒たっても始まる）。','前半・試合終了の<b>30秒前と10秒前</b>に、画面と音でお知らせ。']},
+    {t:'🌐 オンラインの一時停止',v:'<div class="tTimer"><b>60</b><span>秒</span></div>',
+     l:['ESCでの一時停止の持ち時間は、<b>各チーム合計60秒</b>。','使い切ると<b>反則負け</b>！相手が止めている間は、試合も止まる。','ハーフタイムは含まない。']},
+    {t:'🏅 AIリーグ',v:'<div class="tBig" style="font-size:54px">5→1<small style="font-size:22px">部</small></div>',
+     l:['5部〜1部。上の部ほど相手AIが速く、パスも正確で、GKもよく止める。','1ラウンドは<b>10試合</b>。勝ち3点・引き分け1点・負け0点。','昇格ライン以上で昇格、残留ライン未満で降格、その間は残留。','結果が確定したらラウンド終了。成績はブラウザに保存される。']}];
+   let kind='tut';const PG=()=>kind==='rules'?RPAGES():PAGES();
+   const render=()=>{const P=PG(),p=P[pg];
     $('tutDots').innerHTML=P.map((_,i)=>'<i class="'+(i===pg?'on':i<pg?'done':'')+'" data-i="'+i+'"></i>').join('');
     $('tutCard').innerHTML='<h3>'+p.t+'</h3><div class="tBody"><div class="tVis">'+p.v+'</div><ul>'+p.l.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>'+(p.go?'<button class="mbtn" id="tutGo">▶ フリー練習をはじめる</button>':'');
+    $('menuTut').querySelector('h2').textContent=kind==='rules'?'ルール説明':'チュートリアル';
     $('tutPrev').style.visibility=pg?'':'hidden';$('tutNext').style.display=pg===P.length-1?'none':'';
     const g=$('tutGo');if(g)g.addEventListener('click',()=>{ui.click();showMain();$('mPrac').click();const b=document.querySelector('#subPrac [data-mode="free"]');if(b)b.click()})};
-   const open=()=>{pg=0;showMain();$('menuMain').style.display='none';$('menuTut').style.display='';$('menuTut').classList.add('show');$('menu').classList.add('rulesOn','fullOn');render()};
-   $('mTut').addEventListener('click',()=>{ui.click();open()});
-   $('tutNext').addEventListener('click',()=>{ui.click();pg=Math.min(pg+1,PAGES().length-1);render()});
+   const open=(k)=>{kind=k||'tut';pg=0;showMain();$('menuMain').style.display='none';$('menuTut').style.display='';$('menuTut').classList.add('show');$('menu').classList.add('rulesOn','fullOn');render()};
+   window.openRules=()=>open('rules');
+   $('mTut').addEventListener('click',()=>{ui.click();PM_PRAC=MR;pracId='';tutArm();window.startMode('tut')});
+   $('tutNext').addEventListener('click',()=>{ui.click();pg=Math.min(pg+1,PG().length-1);render()});
    $('tutPrev').addEventListener('click',()=>{ui.click();pg=Math.max(pg-1,0);render()});
    $('tutBack').addEventListener('click',()=>showMain());
    $('tutDots').addEventListener('click',e=>{const t=e.target.closest('[data-i]');if(t){pg=+t.dataset.i;ui.click();render()}});
@@ -2189,13 +2372,36 @@ setPlayerRole(playerRole);refreshPos();
    $('sqBack').addEventListener('click',()=>sqLeave());
    window.sqSmall=sqSmall;sqSmall()}
   {let bi=0,view='list';
-   const bnMain=b=>b.sp?b.pick.slice(0,3).map(id=>CARDS[id]):[4,2,1].map(r=>Object.values(POOL).filter(c=>c.tier===2&&c.role===r).sort((a,b)=>b.ovr-a.ovr)[0]).filter(Boolean); // 通常ガチャの顔: CF・MF・CBの最高SR
-   const gcView=v=>{view=v;$('gcSel').style.display=v==='list'?'':'none';$('gcDetail').style.display=v==='list'?'none':'';$('gcPity').style.display=v==='list'?'none':'';$('gcBack').textContent=v==='list'?'← もどる':'← ガチャ一覧へ'};
+   let pkRot=0;const pkWin=a=>{if(a.length<=3)return a;const o=[];for(let i=0;i<3;i++)o.push(a[(pkRot+i)%a.length]);return o}; // ピックアップが4人以上のときは、3人ずつ入れ替えて表示
+   const pkDots=(a,pos)=>{const n=a.length;if(n<=3)return '';pos=pos===undefined?pkRot%n:pos;return '<span class="pkArr" data-d="-1">‹</span><b class="pkLbl">PICK UP <em>'+n+'</em>人</b>'+a.map((id,i)=>'<i data-i="'+i+'" class="'+(((i-pos)+n)%n<3?'on':'')+'"></i>').join('')+'<span class="pkArr" data-d="1">›</span>'}
+   const trX=k=>'translateX(calc(-1 * '+k+' * (100% + var(--g)) / 3))';
+   const carHTML=(list,g)=>{const n=list.length,k=pkRot%n;return '<div class="pkTrack" data-k="'+k+'" data-n="'+n+'" style="--g:'+g+'px;transform:'+trX(k)+'">'+list.concat(list.slice(0,3)).join('')+'</div>'}
+   let pkPause=0;
+   document.addEventListener('click',e=>{ // 詳細画面・結果のカードをタップ → 選手の詳細
+     const d=e.target.closest('#gcPick [data-id],#gcOut [data-id]');if(!d||!window.plOpen)return;e.stopPropagation();
+     const ids=[...d.parentElement.querySelectorAll('[data-id]')].map(x=>x.dataset.id);ui.click&&ui.click();plOpen(d.dataset.id,ids)})
+   const goTrack=(tr,ids,dots,d,abs)=>{const n=+tr.dataset.n;let k=+tr.dataset.k||0;clearTimeout(tr._t);
+     if(abs!==undefined){k=abs}else{if(d<0&&k<=0){tr.style.transition='none';k=n;tr.style.transform=trX(n);void tr.offsetWidth}k+=d}
+     tr.dataset.k=k;tr.style.transition='transform .9s cubic-bezier(.65,0,.25,1)';tr.style.transform=trX(k);
+     if(dots)dots.innerHTML=pkDots(ids,k%n);
+     if(k>=n)tr._t=setTimeout(()=>{tr.style.transition='none';tr.dataset.k=0;tr.style.transform=trX(0)},980)}
+   const stepTrack=(tr,ids,dots)=>goTrack(tr,ids,dots,1)
+   const carCtx=el=>{const t=el.closest('.gcTile');if(t){const b=BN[+t.dataset.b];return b&&{tr:t.querySelector('.pkTrack'),ids:b.pick,dots:t.querySelector('.pkDots')}}
+     if(el.closest('#gcDetail')){const b=BN[bi];return b&&{tr:$('gcPick').querySelector('.pkTrack'),ids:b.pick,dots:$('gcPkDots')}}return null}
+   document.addEventListener('click',e=>{ // 矢印・ドットで操作 / スワイプ直後のクリックは無視
+     if(Date.now()-(window.__carSw||0)<450&&e.target.closest('.car,.gcTile')){e.stopPropagation();e.preventDefault();return}
+     const a=e.target.closest('.pkArr'),dt=e.target.closest('.pkDots i');if(!a&&!dt)return;
+     e.stopPropagation();e.preventDefault();const c=carCtx(e.target);if(!c||!c.tr)return;pkPause=Date.now()+9000;
+     if(a)goTrack(c.tr,c.ids,c.dots,+a.dataset.d);else goTrack(c.tr,c.ids,c.dots,0,+dt.dataset.i)},true)
+   {let sx=null;document.addEventListener('pointerdown',e=>{sx=e.target.closest('.gtC.car,.gcPick.car')?e.clientX:null});
+    document.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)<35)return;const c=carCtx(e.target);if(!c||!c.tr)return;window.__carSw=Date.now();pkPause=Date.now()+9000;goTrack(c.tr,c.ids,c.dots,dx<0?1:-1)})}
+   const bnMain=b=>b.sp?b.pick.map(id=>CARDS[id]):[4,2,1].map(r=>Object.values(POOL).filter(c=>c.tier===2&&c.role===r).sort((a,b)=>b.ovr-a.ovr)[0]).filter(Boolean); // 通常ガチャの顔: CF・MF・CBの最高SR
+   const gcView=v=>{view=v;$('gcSel').style.display=v==='list'?'':'none';$('gcDetail').style.display=v==='list'?'none':'';$('gcPity').style.display=v==='list'?'none':'';$('gcPrev').style.display=$('gcNext').style.display=v==='list'?'':'none';$('gcBack').textContent=v==='list'?'← もどる':'← ガチャ一覧へ'};
    const gcRender=()=>{
      $('gcCoin').textContent=sv.coins;
      if(view==='list'){$('menuGacha').classList.remove('sp','lg');
        $('gcSel').innerHTML=BN.map((b,i)=>{const pc=b.sp?(sv.pityB[b.id]||0):sv.pity;
-         return '<button class="gcTile'+(b.sp?' sp':'')+(b.topN?' lg':'')+'" data-b="'+i+'"><span class="gtBadge">'+(b.topN?'LEGEND':b.sp?'PICK UP':'STANDARD')+'</span><b class="gtName">'+b.n+'</b><div class="gtC">'+bnMain(b).map(c=>cardHTML(c)).join('')+'</div><div class="gtInfo"><span>🪙 '+b.one+' ／ 1回</span><span>🪙 '+b.ten+' ／ 10連</span></div><small class="gtPity">天井まであと '+(b.pity-pc)+' 回（'+b.tx+'確定）</small><span class="gtGo">ガチャを引く ▶</span></button>'}).join('');
+         return '<button class="gcTile'+(b.sp?' sp':'')+(b.topN?' lg':'')+'" data-b="'+i+'"><span class="gtBadge">'+(b.topN?'LEGEND':b.sp?'PICK UP':'STANDARD')+'</span><b class="gtName">'+b.n+'</b><div class="gtC'+(b.sp&&b.pick.length>3?' car':'')+'">'+(b.sp&&b.pick.length>3?carHTML(bnMain(b).map(c=>cardHTML(c)),8):bnMain(b).map(c=>cardHTML(c)).join(''))+'</div>'+(b.sp?'<div class="pkDots">'+pkDots(b.pick)+'</div>':'')+'<div class="gtInfo"><span>🪙 '+b.one+' ／ 1回</span><span>🪙 '+b.ten+' ／ 10連</span></div><small class="gtPity">天井まであと '+(b.pity-pc)+' 回（'+b.tx+'確定）</small><span class="gtGo">ガチャを引く ▶</span></button>'}).join('');
        requestAnimationFrame(()=>{const sl=$('gcSel'),h=$('gcHint'),ov=sl.scrollWidth>sl.clientWidth+4;const ctr=()=>{const t1=sl.children[Math.min(1,sl.children.length-1)];if(t1&&sl.scrollWidth>sl.clientWidth+4)sl.scrollLeft=t1.offsetLeft-sl.offsetLeft+t1.offsetWidth/2-sl.clientWidth/2};ctr();setTimeout(ctr,80);h.style.display=ov?'':'none';h.textContent='◀ 横にスクロールで、ほかのガチャも見られる（全 '+BN.length+' 種） ▶'});
        gcSmall();return}
      const b=BN[bi],pc=b.sp?(sv.pityB[b.id]||0):sv.pity;
@@ -2206,14 +2412,14 @@ setPlayerRole(playerRole);refreshPos();
      $('gc1').disabled=sv.coins<b.one;$('gc10').disabled=sv.coins<b.ten;
      $('menuGacha').classList.toggle('sp',!!b.sp);
      const pk=$('gcPick');pk.classList.toggle('on',!!b.sp);
-     pk.innerHTML=b.sp?b.pick.map(id=>cardHTML(CARDS[id],'<span class="gcTag">PICK UP</span>')).join(''):'';
+     {const L=b.sp?b.pick.map(id=>cardHTML(CARDS[id],'<span class="gcTag">PICK UP</span>').replace('class="gcCard','data-id="'+id+'" class="gcCard')):[];$('gcPkHint').style.display=b.sp?'':'none';pk.classList.remove('car');pk.classList.toggle('many',L.length>3);pk.innerHTML=L.join('')} // 詳細画面は全員を並べて表示$('gcPkDots').innerHTML='';
      $('gcRates').textContent='排出率：'+TIER_N.slice(0,4).map((n,i)=>b.rates[i]?(i===3&&b.topN?b.topN:n)+' '+b.rates[i]+'%':'').filter(Boolean).join(' / ')+(b.sp?'（'+(b.topN||'スペシャル')+'は'+(b.pickRate>=1?'ピックアップ'+b.pick.length+'人のみ':'の'+Math.round(b.pickRate*100)+'%がピックアップ'+b.pick.length+'人')+'。ピックアップ1人あたり約'+(b.rates[3]*b.pickRate/b.pick.length).toFixed(2)+'%）':'（スペシャルは出ない）')+'　手持ち '+ownedCount()+' / '+Object.keys(CARDS).length+'人';
      gcSmall()};
    const gcSmall=()=>{$('gcSmall').textContent='🪙 '+sv.coins+'　手持ち '+ownedCount()+'人　ガチャ '+BN.length+'種'};
    const draw=n=>{const out=gcPull(n,bi);if(!out){ui.back();return}
      const best=Math.max(...out.map(o=>o.c.tier));
      $('gcOut').className=n===1?'one':'';
-     $('gcOut').innerHTML=out.map((o,i)=>cardHTML(o.c,(o.pick?'<span class="gcTag" style="left:auto;right:4px;background:#ff4dd8">PICK UP</span>':'')+'<span class="gcTag'+(o.isNew?'':' dup')+'">'+(o.isNew?'NEW':'重複')+'</span>',i)).join('');
+     $('gcOut').innerHTML=out.map((o,i)=>cardHTML(o.c,(o.pick?'<span class="gcTag" style="left:auto;right:4px;background:#ff4dd8">PICK UP</span>':'')+'<span class="gcTag'+(o.isNew?'':' dup')+'">'+(o.isNew?'NEW':'重複')+'</span>',i).replace('class="gcCard','data-id="'+o.c.id+'" class="gcCard')).join('');
      (best>=2?ui.final:best>=1?ui.ok:ui.click)();
      if(window.gcListClose)gcListClose();gcRender();msBadge()};
    {let lt=-1,sel=null,open=false;const tabsEl=$('gcLstTabs');
@@ -2241,7 +2447,21 @@ setPlayerRole(playerRole);refreshPos();
    $('gc1').addEventListener('click',()=>draw(1));$('gc10').addEventListener('click',()=>draw(10));
    $('mGacha').addEventListener('click',()=>{showMain();$('gcOut').innerHTML='';if(window.gcListClose)gcListClose();gcView('list');gcRender();$('menuMain').style.display='none';$('menuGacha').style.display='';$('menuGacha').classList.add('show');$('menu').classList.add('rulesOn','fullOn')});
    $('gcBack').addEventListener('click',()=>{if(view==='detail')gcToList();else showMain()});
-   window.gcSmall=gcSmall;gcSmall()}
+   window.gcSmall=gcSmall;gcSmall();
+   setInterval(()=>{ // ピックアップを横にスライドして入れ替え（3.5秒ごと）
+     if(!$('menuGacha').offsetParent||Date.now()<pkPause)return;pkRot++;
+     for(const t of document.querySelectorAll('#gcSel .gcTile')){const b=BN[+t.dataset.b];if(!b||!b.sp||b.pick.length<=3)continue;const tr=t.querySelector('.pkTrack');if(tr)stepTrack(tr,b.pick,t.querySelector('.pkDots'))}
+     if(view!=='list'){const b=BN[bi],tr=$('gcPick').querySelector('.pkTrack');if(b&&b.sp&&tr)stepTrack(tr,b.pick,$('gcPkDots'))}
+   },3500);
+   {const sl=$('gcSel'),step=d=>{const t=sl.querySelector('.gcTile'),w=t?t.offsetWidth+18:400;sl.scrollBy({left:d*w,behavior:'smooth'})};
+    $('gcPrev').onclick=()=>step(-1);$('gcNext').onclick=()=>step(1);
+    sl.addEventListener('wheel',e=>{if(sl.scrollWidth<=sl.clientWidth+4)return;const d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;e.preventDefault();sl.scrollLeft+=d},{passive:false});
+    let dn=false,sx=0,sl0=0,mv=false;
+    sl.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0||e.target.closest('.car,.pkDots'))return;dn=true;mv=false;sx=e.clientX;sl0=sl.scrollLeft});
+    addEventListener('pointermove',e=>{if(!dn)return;const dx=e.clientX-sx;if(!mv&&Math.abs(dx)>6){mv=true;sl.classList.add('drag')}if(mv)sl.scrollLeft=sl0-dx});
+    addEventListener('pointerup',()=>{if(!dn)return;dn=false;sl.classList.remove('drag')});
+    sl.addEventListener('click',e=>{if(mv){e.stopPropagation();e.preventDefault();mv=false}},true)}
+}
   {let tab='day';
    const tabs=$('menuMission').querySelectorAll('.msTabs button');
    const render=()=>{msSync();
@@ -2259,6 +2479,7 @@ setPlayerRole(playerRole);refreshPos();
    msBadge()}
   for(const id of['mPrac','mOnline'])$(id).addEventListener('click',()=>{const g=$(id).parentElement,o=g.classList.contains('open');document.querySelectorAll('#menu .grp').forEach(x=>x.classList.remove('open'));if(!o)g.classList.add('open');$('roomErr').textContent=''});
   const open=(m,lgm)=>{leagueMatch=!!lgm;matchStarted=false;matchOver=false;applyMode(m);newMatch();showStartFor();if(lgm)$('startMsg').textContent='AIリーグ '+LG[lg.div].n+'（'+LG[lg.div].nm+'）第'+(lg.played+1)+'節：ポジションを選んで「試合開始」';$('menu').style.display='none';showMain()};
+  window.startMode=open;
   $('mAI').addEventListener('click',()=>open('match'));
   lgRender();
   $('mLgGo').addEventListener('click',()=>open('match',true));
@@ -2291,6 +2512,7 @@ setPlayerRole(playerRole);refreshPos();
     showMain();$('menu').style.display='flex';refreshPos()});
   $('backMenu').addEventListener('click',e=>{e.stopPropagation();if(net.role){location.hash='';location.reload();return}if(matchStarted&&mode==='match')return;matchStarted=false;$('menu').style.display='flex'});
 })();
+function plBlocked(e){const m=String(e&&e.message||e);if(/sandbox|allow-pointer-lock/i.test(m))msg('この表示枠ではマウス固定が使えません。ページを別タブ（GitHub Pagesなど）で開いてね',6000);else msg('マウス固定に失敗: '+m)}
 $('startBtn').addEventListener('click',()=>{
   if(htOn){ // ハーフタイム: 準備OK
     if(net.role==='guest'){gRdy=true;netSend({t:'rdy'});htRender();return}
@@ -2302,8 +2524,8 @@ $('startBtn').addEventListener('click',()=>{
   ac();if(AC&&AC.state==='suspended')AC.resume();
   const el=renderer.domElement;
   try{const pr=el.requestPointerLock({unadjustedMovement:true});
-    if(pr&&pr.then)pr.then(()=>{rawOK=true;msg('生入力: ON')}).catch(()=>{rawOK=false;msg('生入力: 非対応（通常入力に切替）');el.requestPointerLock()})}
-  catch(e){el.requestPointerLock()}
+    if(pr&&pr.then)pr.then(()=>{rawOK=true;msg('生入力: ON')}).catch(()=>{rawOK=false;msg('生入力: 非対応（通常入力に切替）');try{const p2=el.requestPointerLock();if(p2&&p2.catch)p2.catch(plBlocked)}catch(e){plBlocked(e)}})}
+  catch(e){try{el.requestPointerLock()}catch(e2){plBlocked(e2)}}
 });
 document.addEventListener('pointerlockchange',()=>{
   locked=document.pointerLockElement===renderer.domElement;
@@ -2312,7 +2534,7 @@ document.addEventListener('pointerlockchange',()=>{
   else if(matchStarted&&mode==='match')net.entered=true;
 });
 document.addEventListener('mousemove',e=>{
-  if(!locked)return;
+  if(!locked||waitFrz)return;
   const k=charging?0.1:sens; // 長押し中は感度0.1固定（微調整のみ）
   let dx=e.movementX,dy=e.movementY;const len=Math.hypot(dx,dy);
   if(len>0){const gn=Math.min(1,150/len)/(1+comp*len/20);dx*=gn;dy*=gn}
@@ -2337,7 +2559,7 @@ function relock(){
 addEventListener('mousedown',relock);addEventListener('keydown',relock);
 addEventListener('contextmenu',e=>e.preventDefault());
 addEventListener('mousedown',e=>{
-  if(!locked)return;
+  if(!locked||waitFrz)return;
   if(e.button===0&&ball.held&&!charging&&(phase!=='kick'||kickW)){charging=true;charge=0;powerEl.style.display='block'}
   if(e.button===2&&phase==='play'&&!ball.held&&pickCD<=0&&diveT<=0&&diveRec<=0){pickCD=pickDur=0.3*PMOD().pk*(has(PSK,'magnet')?0.75:1);
     if(net.role==='guest'){net.n.pick++;return}
@@ -2355,25 +2577,119 @@ addEventListener('mouseup',e=>{
     if(ball.held){if(net.role==='guest'){net.thr={n:net.thr.n+1,p:charge,yaw:player.yaw,pitch:player.pitch};ball.held=false;pickCD=pickDur=0.3;boostT=(charge<0.4?0.15:0.7)}else throwBall(charge)}
   }
 });
+
+/* ===== タッチ操作（スマホ/タブレット）。PCではそのまま。?touch=1 で強制ON ===== */
+const TOUCH=(matchMedia('(pointer:coarse)').matches&&!matchMedia('(pointer:fine)').matches)||/[?&]touch=1/.test(location.search);
+if(TOUCH){(()=>{
+  document.body.classList.add('touch');
+  // ポインターロックの代わり: 「ロック中＝プレイ中」として扱う（既存の処理をそのまま使うため）
+  Object.defineProperty(document,'pointerLockElement',{get:()=>locked?renderer.domElement:null,configurable:true});
+  const fire=()=>document.dispatchEvent(new Event('pointerlockchange'));
+  document.exitPointerLock=()=>{if(locked){locked=false;fire()}};
+  Element.prototype.requestPointerLock=function(){
+    if(!locked){locked=true;fire()}
+    try{const de=document.documentElement;if(!document.fullscreenElement&&de.requestFullscreen){const r=de.requestFullscreen({navigationUI:'hide'});if(r&&r.catch)r.catch(()=>{})}}catch(e){}
+    try{const o=screen.orientation;if(o&&o.lock){const r=o.lock('landscape');if(r&&r.catch)r.catch(()=>{})}}catch(e){}
+    return new Promise(()=>{});
+  };
+  const tc=document.createElement('div');tc.id='tc';
+  tc.innerHTML='<div id="tcBase"><i id="tcKnob"></i></div><button id="tcPause" type="button">⏸</button>'
+   +'<button id="tcThrow" class="tb" type="button"><b>投げる</b><small>長押し=チャージ</small></button>'
+   +'<button id="tcPick" class="tb" type="button"><b>拾う</b></button>'
+   +'<button id="tcJump" class="tb" type="button"><b>ジャンプ</b></button>'
+   +'<button id="tcDive" class="tb" type="button"><b>ダイブ</b></button>'
+   +'<div id="tcRot">📱 横向きにしてね</div>';
+  document.body.appendChild(tc);
+  const hn=document.createElement('div');hn.id='tcHint';hn.textContent='左：スティック（端まで倒すとダッシュ）／右：ドラッグで視点／投げる長押しでチャージ';tc.appendChild(hn);
+  const base=$('tcBase'),knob=$('tcKnob');
+  const kev=(t,c)=>window.dispatchEvent(new KeyboardEvent(t,{code:c,key:c,bubbles:true,cancelable:true}));
+  const mev=(t,b)=>window.dispatchEvent(new MouseEvent(t,{button:b,bubbles:true,cancelable:true}));
+  const acts={tcThrow:{d:()=>mev('mousedown',0),u:()=>mev('mouseup',0),look:1},
+    tcPick:{d:()=>mev('mousedown',2),u:()=>mev('mouseup',2)},
+    tcJump:{d:()=>kev('keydown',bind.jump),u:()=>kev('keyup',bind.jump)},
+    tcDive:{d:()=>kev('keydown',bind.dive),u:()=>kev('keyup',bind.dive)}};
+  const T={}; // identifier -> {type:'stick'|'look'|'btn', ...}
+  const R=58;
+  function setMove(dx,dy){
+    const l=Math.hypot(dx,dy),th=R*0.25;
+    keys[bind.fw]=dy<-th;keys[bind.bk]=dy>th;keys[bind.lf]=dx<-th;keys[bind.rt]=dx>th;
+    keys[bind.sprint]=l>R*0.92; // スティックを端まで倒すとダッシュ
+  }
+  function look(dx,dy,fine){
+    if(!locked||waitFrz)return;
+    const k=(charging||fine)?0.1:sens;
+    player.yaw-=dx*0.0055*k;player.pitch=Math.max(-1.5,Math.min(1.5,player.pitch-dy*0.0055*k));
+  }
+  function relAll(){
+    for(const id in T){const t=T[id];if(t.type==='btn'){t.el.classList.remove('on');acts[t.el.id].u()}}
+    for(const k of [bind.fw,bind.bk,bind.lf,bind.rt,bind.sprint])keys[k]=false;
+    for(const id in T)delete T[id];base.style.display='none';
+  }
+  function show(on){tc.style.display=on?'block':'none';if(!on)relAll()}
+  show(false);
+  document.addEventListener('pointerlockchange',()=>show(locked));
+  tc.addEventListener('touchstart',e=>{
+    e.preventDefault();
+    for(const t of e.changedTouches){
+      const b=t.target.closest&&t.target.closest('button');
+      if(b&&b.id==='tcPause'){document.exitPointerLock();continue}
+      if(b&&acts[b.id]){T[t.identifier]={type:'btn',el:b,x:t.clientX,y:t.clientY};b.classList.add('on');acts[b.id].d();continue}
+      if(t.clientX<innerWidth*0.45){
+        const o=Object.values(T).find(v=>v.type==='stick');if(o)continue;
+        T[t.identifier]={type:'stick',x0:t.clientX,y0:t.clientY};
+        base.style.display='block';base.style.left=t.clientX+'px';base.style.top=t.clientY+'px';knob.style.transform='translate(-50%,-50%)';
+      }else T[t.identifier]={type:'look',x:t.clientX,y:t.clientY};
+    }
+  },{passive:false});
+  tc.addEventListener('touchmove',e=>{
+    e.preventDefault();
+    for(const t of e.changedTouches){
+      const s=T[t.identifier];if(!s)continue;
+      if(s.type==='stick'){
+        let dx=t.clientX-s.x0,dy=t.clientY-s.y0;const l=Math.hypot(dx,dy);
+        if(l>R){dx*=R/l;dy*=R/l}
+        knob.style.transform='translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px))';setMove(dx,dy);
+      }else if(s.type==='look'||(s.type==='btn'&&acts[s.el.id].look)){
+        look(t.clientX-s.x,t.clientY-s.y,s.type==='btn');s.x=t.clientX;s.y=t.clientY;
+      }
+    }
+  },{passive:false});
+  const end=e=>{
+    e.preventDefault();
+    for(const t of e.changedTouches){
+      const s=T[t.identifier];if(!s)continue;
+      if(s.type==='btn'){s.el.classList.remove('on');acts[s.el.id].u()}
+      else if(s.type==='stick'){setMove(0,0);base.style.display='none'}
+      delete T[t.identifier];
+    }
+  };
+  tc.addEventListener('touchend',end,{passive:false});tc.addEventListener('touchcancel',end,{passive:false});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&locked)document.exitPointerLock()});
+})()}
 function throwBall(p){
   const kk=phase==='kick';endKick();
   const dir=new THREE.Vector3();camera.getWorldDirection(dir);
   dir.y+=0.12;
   if(kk&&dir.z>0){dir.z=-dir.z;msg('キックオフは後ろにしかパスできない')} // 青の攻める向きは＋Z。キックオフは後ろ（−Z）へ
-  {const j=has(PSK,'buildup')?0:PMOD().jit;if(j>0){dir.x+=(Math.random()-0.5)*j;dir.y+=(Math.random()-0.5)*j}} // パス精度が低いと少しブレる
+  {const itp=intimNear(player.pos.x,player.pos.z,player);const tsp=teaseNear(player.pos.x,player.pos.z,'B');const j=((has(PSK,'buildup')||has(PSK,'vgpass'))?0:PMOD().jit)+(itp?0.16:0)+(tsp?0.12:0);if(itp)msg('威圧されている…');else if(tsp)msg('からかわれている…');if(j>0){dir.x+=(Math.random()-0.5)*j;dir.y+=(Math.random()-0.5)*j}} // パス精度が低いと少しブレる
+  const vg=has(PSK,'vgpass')&&p<0.85;if(vg)dir.y=-0.03;
   dir.normalize();
   ball.p.copy(camera.position).addScaledVector(dir,0.7);
-  const fxm=shotFx(PSK,p,latOf(player.vel.x,player.vel.z,dir.x,dir.z),!player.ground,1);
+  const fxm=shotFx(PSK,p,latOf(player.vel.x,player.vel.z,dir.x,dir.z),!player.ground,1)*(intimNear(player.pos.x,player.pos.z,player)?0.85:1)*(teaseNear(player.pos.x,player.pos.z,'B')?0.9:1)*(has(PSK,'ego')&&egoM>0?1+0.15*egoM/100:1)*(vg?1.1:1);
   ball.v.copy(dir).multiplyScalar(7+26*p*PMOD().thr*fxm);
   ball.v.x+=player.vel.x*0.5;ball.v.z+=player.vel.z*0.5;
   if(ball.curve)msg('ブリッツカーブ！');else if(ball.flat)msg('バレットハンド！');else if(ball.drive)msg('ピジョンストライク！');
-  ball.held=false;pickCD=pickDur=0.3;ball.byPlayer=true;ball.team='B';ball.passTo=null;ball.passToPlayer=false;ball.pgrace=0.3;ball.tid=(ball.tid||0)+1;ball.passTid=ball.tid;ball.passToPlayer=(p<0.4);ball.selfPush=(p<0.4);if(p<0.4){ball.ownUntil=performance.now()+300;pickCD=pickDur=0.35;ball.p.y=Math.max(R+0.2,ball.p.y-0.9)}boostT=(p<0.4?0.15:0.7);sfx.throw(p);
+  if(has(PSK,'ego')&&egoM>30){ball.flat=Math.max(ball.flat||0,0.6*egoM/100);msg('エゴイスト！')}
+  ball.grd=false;if(vg){ball.p.y=R;ball.v.y=0;ball.grd=true;ball.flat=0;ball.curve=0;ball.drive=0;{const sp=Math.hypot(ball.v.x,ball.v.z);if(sp>0.1&&sp<24)ball.v.multiplyScalar(24/sp)}msg('グラウンダーパス！')}
+  ball.held=false;pickCD=pickDur=0.3;ball.byPlayer=true;ball.team='B';ball.passTo=null;ball.passToPlayer=false;ball.pgrace=0.3;ball.tid=(ball.tid||0)+1;ball.passTid=ball.tid;ball.thrBy='P';ball.thrTid=ball.tid;ball.thrAt=performance.now();ball.passToPlayer=(p<0.4);ball.selfPush=(p<0.4);if(p<0.4){ball.ownUntil=performance.now()+300;pickCD=pickDur=0.35;ball.p.y=Math.max(R+0.2,ball.p.y-0.9)}boostT=(p<0.4?0.15:0.7);sfx.throw(p);
 }
 
 /* ---- goal ---- */
 function scored(side){ // side: +1 => ball in +Z goal => BLUE scores
   if(resetTimer>0)return;
   if(side>0)score.b++;else score.r++;
+  if(side>0&&has(PSK,'ego')&&ball.thrBy==='P'&&!ball.held){egoM=Math.max(egoM,80);egoT=12;msg('エゴイスト！ メーター80キープ（12秒）')} // 自分のゴールで一定時間80から落ちない
+  if(mode==='tut'){TUT.evA=(TUT.evA||0)+1;if(side>0)TUT.evB=(TUT.evB||0)+1} // チュートリアル用のゴール通知（どちらのゴールでもevA、青のゴールだけevB）
   kickTeam=side>0?'R':'B'; // 点を取られた側がキックオフ
   {const T=side>0?'B':'R',L=tr.log,a=L[L.length-1],b=L[L.length-2];let sc=null,as=null;
    if(a&&a.k[0]===T&&tr.clock-a.t<12){sc=a.k;st(sc).g++;
@@ -2465,7 +2781,7 @@ function phaseUpdate(dt){ // カウントダウン・キックオフ中（AIは�
 /* ---- physics ---- */
 function stepBall(dt){
   const p=ball.p,v=ball.v;
-  v.y-=18*dt;
+  v.y-=18*dt;if(ball.held||ball.ai)ball.grd=false;
   if(ball.curve||ball.flat){if(ball.held||ball.ai||!ball.team){ball.curve=0;ball.flat=0}else{
     if(ball.flat)v.y+=18*dt*ball.flat; // バレットハンド: 落ちにくい
     if(ball.curve){const h=Math.hypot(v.x,v.z);if(h>0.5){const a=ball.curve*0.45*dt,ox=v.x;v.x+=-v.z*a;v.z+=ox*a;const h2=Math.hypot(v.x,v.z)||1;v.x*=h/h2;v.z*=h/h2}} // ブリッツカーブ: 進行方向の右(＋)/左(−)へ曲がる
@@ -2475,7 +2791,7 @@ function stepBall(dt){
   const drag=Math.max(0,1-0.15*dt);v.multiplyScalar(drag);
   // floor / ceiling
   if(p.y<R){p.y=R;ball.drive=0;ball.curve=0;ball.flat=0;if(v.y<0){if(v.y<-2)sfx.bounce(-v.y);v.y*=-0.68}
-    const f=Math.max(0,1-1.4*dt);v.x*=f;v.z*=f;if(Math.abs(v.y)<0.6)v.y=0}
+    const f=Math.max(0,1-1.4*(ball.grd?0.35:1)*dt);v.x*=f;v.z*=f;if(Math.abs(v.y)<0.6)v.y=0}
   if(p.y>14-R){p.y=14-R;if(v.y>0)v.y*=-0.5}
   // walls
   const hit=s=>{if(s>3)sfx.bounce(s)};
@@ -2582,6 +2898,22 @@ if(welcomeNow){const iv=setInterval(()=>{if(document.getElementById('ldScr'))ret
 })();
 /* ===== オンライン対戦（ホストが全員を計算 / ゲストは操作を送って結果を表示）===== */
 const ORDER=[...redAll,...blueAll]; // スナップショットの並び（赤0-4, 青0-4）
+/* ===== オンライン: 相手が操作しているキャラの頭上マーク ===== */
+const oppMk=(()=>{
+  const c=document.createElement('canvas');c.width=256;c.height=112;const g=c.getContext('2d');
+  g.fillStyle='rgba(10,14,30,.82)';g.strokeStyle='#ffb41f';g.lineWidth=5;
+  g.beginPath();g.roundRect?g.roundRect(8,6,240,62,14):g.rect(8,6,240,62);g.fill();g.stroke();
+  g.fillStyle='#ffb41f';g.beginPath();g.moveTo(104,68);g.lineTo(152,68);g.lineTo(128,100);g.closePath();g.fill();
+  g.fillStyle='#fff';g.font='bold 34px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('相手プレイヤー',128,38);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false,transparent:true,sizeAttenuation:false}));
+  sp.scale.set(0.2,0.0875,1);sp.renderOrder=20;sp.visible=false;scene.add(sp);return sp})();
+function oppMark(G){
+  let D=null;
+  if(matchStarted&&!matchOver&&mode==='match'&&net.connected){
+    if(!G&&net.guestRole>=0)D=redAll[net.guestRole];
+    else if(G&&net.hostRole>=0)D=blueAll[net.hostRole]}
+  if(!D||!D.visible){oppMk.visible=false;return}
+  oppMk.visible=true;oppMk.position.set(D.position.x,D.position.y+2.35+0.07*Math.sin(performance.now()/260),D.position.z)}
 const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 function netEv(e){if(net.role!=='host'||!net.connected)return;net.evQ.push([++net.evId,...e]);if(net.evQ.length>40)net.evQ.shift()}
 function netSend(o){if(net.conn&&net.conn.open){try{net.conn.send(o)}catch(e){}}}
@@ -2717,7 +3049,7 @@ function buildSnap(){
   });
   let h=-1;if(ball.held)h=10;else if(ball.ai)h=ORDER.indexOf(ball.ai);
   const gu=net.guestRole>=0?redAll[net.guestRole].userData:null;
-  return {t:'s',k:net.ack,d,b:[r2(ball.p.x),r2(ball.p.y),r2(ball.p.z),r2(ball.v.x),r2(ball.v.y),r2(ball.v.z)],h,sc:[score.b,score.r],mt:Math.ceil(matchT),hf:half,pz:[Math.ceil(Math.max(0,net.pz.h)),Math.ceil(Math.max(0,net.pz.g)),(!locked&&net.entered&&!htOn)?1:0,net.gPz?1:0],ph:PH_N[phase],cd:phase==='count'?(cdT>1?Math.ceil(cdT-1):0):(phase==='kick'?(kickW?-3:-2):-1),ht:gu?r2(gu.holdT):0,ev:net.evQ.slice()};
+  return {t:'s',k:net.ack,d,b:[r2(ball.p.x),r2(ball.p.y),r2(ball.p.z),r2(ball.v.x),r2(ball.v.y),r2(ball.v.z)],h,sc:[score.b,score.r],mt:Math.ceil(matchT),hf:half,hr:playerRole,pz:[Math.ceil(Math.max(0,net.pz.h)),Math.ceil(Math.max(0,net.pz.g)),(!locked&&net.entered&&!htOn)?1:0,net.gPz?1:0],ph:PH_N[phase],cd:phase==='count'?(cdT>1?Math.ceil(cdT-1):0):(phase==='kick'?(kickW?-3:-2):-1),ht:gu?r2(gu.holdT):0,ev:net.evQ.slice()};
 }
 function guestEv(e){
   const k=e[1];
@@ -2729,7 +3061,7 @@ function guestEv(e){
 function onSnap(m){
   phase=['play','count','kick'][m.ph||0];kickW=(m.cd===-3);
   if(m.cd!==net.cdv){net.cdv=m.cd;showCd(m.cd>0?String(m.cd):m.cd===0?'KICK OFF':(m.cd===-2||m.cd===-3)?'KICK OFF':'')}
-  net.tgt=m.d;net.bt=m.b;net.bAge=0;net.holder=m.h;net.mt=m.mt;net.half=m.hf||1;net.pzv=m.pz||null;
+  net.tgt=m.d;net.bt=m.b;net.bAge=0;net.holder=m.h;net.mt=m.mt;net.half=m.hf||1;net.hostRole=(m.hr===undefined?-1:m.hr);net.pzv=m.pz||null;
   score.b=m.sc[0];score.r=m.sc[1];$('sb').textContent=score.b;$('sr').textContent=score.r;
   const me=net.myRole;
   ball.held=(m.h===me);ball.ai=(m.h>=0&&m.h<10&&m.h!==me)?ORDER[m.h]:null;
@@ -2771,7 +3103,7 @@ function netTick(dt){
   if(net.role==='host'){if(net.sendT>=0.05){net.sendT=0;netSend(buildSnap())}}
   else if(net.sendT>=0.033){
     net.sendT=0;
-    const act=locked&&matchStarted&&!net.stun;
+    const act=locked&&matchStarted&&!net.stun&&!waitFrz;
     const fw=act?((kd('fw')?1:0)-(kd('bk')?1:0)):0,sd=act?((kd('rt')?1:0)-(kd('lf')?1:0)):0;
     const q=++net.seq;net.hist[q]=[player.pos.x,player.pos.z];delete net.hist[q-120];
     const r3=v=>Math.round(v*1000)/1000;
@@ -2880,9 +3212,9 @@ function updateDiveMarks(dt){
 
 /* ---- loop ---- */
 const DIVE_T=0.45,DIVE_SP=12,DIVE_REC=0.4,DIVE_CD=1.6,DIVE_R=1.8;
-let diveProt=0,diveSpd=DIVE_SP,diveDur=DIVE_T,diveAir=false,diveT=0,diveRec=0,diveCD=0,diveLow=0,diveHit=false,diveSide=0,diveDir={x:0,z:-1};
+let qdT=0,qdPrev=false,qdOn=false,diveProt=0,diveSpd=DIVE_SP,diveDur=DIVE_T,diveAir=false,diveT=0,diveRec=0,diveCD=0,diveLow=0,diveHit=false,diveSide=0,diveDir={x:0,z:-1};
 function startDive(){
-  if(!locked||!matchStarted||matchOver||phase!=='play'||ball.held||diveT>0||diveRec>0||diveCD>0)return;
+  if(!locked||waitFrz||!matchStarted||matchOver||phase!=='play'||ball.held||diveT>0||diveRec>0||diveCD>0)return;
   let fw=(kd('fw')?1:0)-(kd('bk')?1:0),sd=(kd('rt')?1:0)-(kd('lf')?1:0);
   if(!fw&&!sd)fw=1;
   const l=Math.hypot(fw,sd);fw/=l;sd/=l;
@@ -2893,7 +3225,7 @@ function startDive(){
   const ld=has(PSK,'longdive')&&!diveAir;diveSpd=diveAir?6:DIVE_SP*PMOD().diveSp*(ld?1.25:1);diveDur=diveAir?0.3:DIVE_T*(ld?1.2:1);
   if(ld)msg('ロングリーチダイブ！');
   if(diveAir)player.vel.y=Math.min(player.vel.y,-5);
-  diveT=diveDur;diveCD=DIVE_CD*PMOD().diveCD;diveHit=false;if(matchStarted&&mode==='match'&&!net.role)dvCnt++;net.n.dive++;if(net.role!=='guest')sfx.throw(0.6);
+  diveT=diveDur;diveCD=DIVE_CD*PMOD().diveCD;qdOn=qdT>0&&has(PSK,'quickdive');if(qdOn){diveCD*=0.5;msg('クイックネスダイブ！')}diveHit=false;if(matchStarted&&mode==='match'&&!net.role)dvCnt++;net.n.dive++;if(net.role!=='guest')sfx.throw(0.6);
 }
 const clock=new THREE.Clock();let lockLostT=0,pickCD=0,pickDur=0.2,boostT=0,holdGrace=0;const cdEl=$('cd'),cdBar=cdEl.firstElementChild,holdEl=$('hold'),holdBar=holdEl.firstElementChild,timerEl=$('timer');
 function animRigs(dt){
@@ -2932,15 +3264,17 @@ function loop(){
   requestAnimationFrame(loop);const _pf0=PF.on?performance.now():0;
   const dt=Math.min(clock.getDelta(),0.05);
   if(qSel==='auto'&&matchStarted&&locked&&qCur!=='low'){qAcc+=dt;qN++;if(qAcc>=2){const fps=qN/qAcc;qAcc=0;qN=0;if(fps<38){if(++qBad>=2){qBad=0;applyQ(qCur==='high'?'mid':'low')}}else qBad=0}}
-  syncSq();{const _c=mode==='match'?(CARDS[sv.squad[net.role==='guest'?net.myRole:playerRole]]||SQUAD[net.role==='guest'?net.myRole:playerRole]):pracCard();PSK=squadOn&&_c?(_c.skill||''):''}
+  syncSq();{const _c=mode==='match'?(CARDS[sv.squad[net.role==='guest'?net.myRole:playerRole]]||SQUAD[net.role==='guest'?net.myRole:playerRole]):(mode==='tut'?null:pracCard());PSK=squadOn&&_c?(_c.skill||''):''}
   const G=net.role==='guest';
   {const D=demoOn();if(D&&!demo.on)enterDemo();else if(!D&&demo.on)exitDemo()}
+  waitFrz=!!(net.role&&mode==='match'&&matchStarted&&!htOn&&!matchOver&&(G?(net.pzv&&net.pzv[2]):net.gPz)); // 相手が一時停止中: こちらも操作できない
+  if(waitFrz&&charging){charging=false;powerEl.style.display='none'}
   const playing=matchStarted&&locked&&!net.gPz; // 試合中（ESCで一時停止すると止まる。オンラインでは相手の一時停止でも止まる）
   if(htOn){if(G)htT=Math.max(0,htT-dt);else{htT-=dt;net.hsT=(net.hsT||0)+dt;if(net.role==='host'&&net.connected&&net.hsT>0.25){net.hsT=0;netSend({t:'hs',s:Math.ceil(Math.max(0,htT)),h:hRdy?1:0,g:gRdy?1:0})}if(htT<=0)endHalftime()}htRender()}
   if(net.role==='host'&&net.connected&&mode==='match'&&matchStarted&&!matchOver&&!htOn&&net.entered){ // オンラインのポーズ持ち時間（各60秒。0で反則負け）
     if(!locked)net.pz.h-=dt;if(net.gPz)net.pz.g-=dt;
     if(net.pz.h<=0)forfeit('B');else if(net.pz.g<=0)forfeit('R')}
-  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);
+  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);oppMark(G);
   if(playing&&phase==='play'&&resetTimer<=0&&mode==='match'&&!G){matchT-=dt;if(matchT<=0){matchT=0;if(half===1)halftime();else endMatch()}}
   // ロックが0.4秒以上外れ続けたときだけ「ロック喪失」と判定（一瞬のブレでは何もしない）
   if(locked&&document.pointerLockElement!==renderer.domElement){
@@ -2950,7 +3284,8 @@ function loop(){
   // 拾うクールダウン（0.2秒）: 白いバーが満タンになるまで次は拾えない
   if(pickCD>0){pickCD=Math.max(0,pickCD-dt);cdEl.style.display='block';cdBar.style.width=(1-pickCD/pickDur)*100+'%'}else cdEl.style.display='none';
   // player
-  if(locked){
+  if(waitFrz){player.vel.x=0;player.vel.z=0;diveT=0}
+  if(locked&&!waitFrz){
     let fw=(kd('fw')?1:0)-(kd('bk')?1:0),sd=(kd('rt')?1:0)-(kd('lf')?1:0);
     if((G&&net.stun)||phase!=='play'){fw=0;sd=0}
     const l=Math.hypot(fw,sd)||1;fw/=l;sd/=l;
@@ -2966,9 +3301,12 @@ function loop(){
     const k=Math.min(1,(player.ground?14:4)*dt);
     player.vel.x+=(tx-player.vel.x)*k;player.vel.z+=(tz-player.vel.z)*k;
     if(phase==='play'&&kd('jump')&&player.ground&&diveT<=0&&diveRec<=0){player.vel.y=7.5;player.ground=false}
-    if(diveT>0){diveT-=dt;const f=0.4+0.6*Math.max(0,diveT)/diveDur;player.vel.x=diveDir.x*diveSpd*f;player.vel.z=diveDir.z*diveSpd*f;if(diveT<=0){diveT=0;diveRec=diveAir?1.0:DIVE_REC}}
+    if(diveT>0){diveT-=dt;const f=0.4+0.6*Math.max(0,diveT)/diveDur;player.vel.x=diveDir.x*diveSpd*f;player.vel.z=diveDir.z*diveSpd*f;if(diveT<=0){diveT=0;diveRec=diveAir?1.0:DIVE_REC*(qdOn?0.6:1)}}
     else if(diveRec>0){diveRec-=dt;const dk=Math.max(0,1-12*dt);player.vel.x*=dk;player.vel.z*=dk;if(diveRec<0)diveRec=0}
   }
+  {const h=ball.held;if(has(PSK,'quickdive')&&h&&!qdPrev)qdT=3;qdPrev=h;qdT=Math.max(0,qdT-dt)}
+  if(mode==='tut')tutUpdate(dt,playing&&phase==='play');
+  if(has(PSK,'ego')){if(playing&&phase==='play'&&!G){egoM=Math.max(-100,Math.min(100,egoM+(ball.held?22:-4)*dt));if(egoT>0){egoT=Math.max(0,egoT-dt);egoM=Math.max(egoM,80)}}egoUi(true)}else egoUi(false)
   diveCD=Math.max(0,diveCD-dt);
   if(diveT>0)diveProt=0.2;else diveProt=Math.max(0,diveProt-dt); // ダイブ中＋終了後0.2秒はボールを守れる
   diveLow+=(((diveT>0||diveRec>0.15)?1:0)-diveLow)*Math.min(1,12*dt);
@@ -2991,7 +3329,7 @@ function loop(){
     }
   }else player.holdT=0; // 持ってない間はゆっくり戻る（押し出しの連続は積み重なる）
   // charge
-  if(charging){const ag=has(PSK,'aggressive')?((diveT>0||diveRec>0)?2:(!player.ground?1.5:1)):1;charge=Math.min(1,charge+dt*ag/0.8);powerBar.style.width=charge*100+'%';powerEl.style.borderColor=charge>=1?'#ff4':'#fff'}
+  if(charging){const ag=has(PSK,'aggressive')?((diveT>0||diveRec>0)?2:(!player.ground?1.5:1)):1;charge=Math.min(1,charge+dt*ag*egoC()/0.8);powerBar.style.width=charge*100+'%';powerEl.style.borderColor=charge>=1?'#ff4':'#fff'}
   // ball
   if(ball.held){ballMesh.position.copy(camera.localToWorld(new THREE.Vector3(0.32*hand,-0.3,-0.65)));
     ball.p.copy(ballMesh.position)}
@@ -3009,6 +3347,8 @@ function loop(){
     const rdx=ball.p.x-player.pos.x,rdz=ball.p.z-player.pos.z;
     if(Math.hypot(rdx,rdz)<(ball.selfPush?1.1:1.6*(has(PSK,'buildup')?1.5:1)*(has(PSK,'magnet')?1.25:1))&&ball.p.y<player.pos.y+2.2){ball.held=true;ball.team=null;ball.passToPlayer=false;holdGrace=0.6;ball.v.set(0,0,0);sfx.pick()}
   }
+  if(!G)intimUpdate();
+  if(!G&&locked&&has(PSK,'technician')&&phase==='play'&&!ball.held&&!ball.ai&&ball.thrBy==='P'&&ball.thrTid===ball.tid&&performance.now()-(ball.thrAt||0)>350&&pickCD<=0&&diveT<=0&&inPick()){ball.held=true;ball.team=null;ball.passToPlayer=false;holdGrace=0.6;ball.v.set(0,0,0);sfx.pick();msg('テクニシャン！')}
   if(G)guestApply(dt);else if(playing){if(phase==='play')aiUpdate(dt);else phaseUpdate(dt)}
   netTick(dt);
   if(!G&&playing&&mode==='match')trackStats(dt);
@@ -3027,7 +3367,7 @@ function loop(){
   ringM.opacity=ball.held?0.12:(near?0.75:0.3);discM.opacity=(near&&!ball.held)?0.18:0.07;
   innerM.opacity=0; // 奪取はなくなったので内側の表示は消す
   stateEl.textContent=ball.held?(charging?'溜め中…離して投げる（視点は微調整のみ）':'ボール所持中…あと'+Math.max(0,HOLD_MAX-player.holdT).toFixed(1)+'秒で落とす（左長押しで投げる）'):(near?(ball.ai?'右クリックで叩き落とせる！':'右クリックで拾える！'):'ボールを探そう');
-  if(mode!=='match'){timerEl.textContent='練習';timerEl.style.color='#9fe8ff'}else{const mt=G?net.mt:matchT,tt=Math.max(0,Math.ceil(mt));timerEl.textContent=((G?net.half:half)===2?'後半 ':'前半 ')+Math.floor(tt/60)+':'+String(tt%60).padStart(2,'0');timerEl.style.color=(mt<=30)?'#ff6b6b':'#fff'}
+  if(mode!=='match'){timerEl.textContent=mode==='tut'?'チュートリアル':'練習';timerEl.style.color='#9fe8ff'}else{const mt=G?net.mt:matchT,tt=Math.max(0,Math.ceil(mt));timerEl.textContent=((G?net.half:half)===2?'後半 ':'前半 ')+Math.floor(tt/60)+':'+String(tt%60).padStart(2,'0');timerEl.style.color=(mt<=30)?'#ff6b6b':'#fff'}
   if(ball.held){holdEl.style.display='block';{const f=Math.min(1,player.holdT/HOLD_MAX);holdBar.style.width=f*100+'%';holdBar.style.background=f>0.75?'#ff3b3b':'#ff9a2e'}}else holdEl.style.display='none';
   {const sm=$('stm'),on2=locked&&matchStarted;sm.style.display=$('stmL').style.display=on2?'block':'none';if(on2){sm.firstElementChild.style.width=stam*100+'%';sm.classList.toggle('tired',tired);sm.classList.toggle('low',!tired&&stam<0.35)}}
   {const dv=$('dv'),on=locked&&matchStarted;dv.style.display=$('dvL').style.display=on?'block':'none';if(on){const rdy=diveCD<=0&&diveT<=0&&diveRec<=0;dv.firstElementChild.style.width=(rdy?1:Math.max(0,1-diveCD/DIVE_CD))*100+'%';dv.classList.toggle('rdy',rdy)}}
