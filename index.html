@@ -605,24 +605,37 @@ body.inMenu #hud{visibility:hidden}
 /* ---- touch ---- */
 #tc{position:fixed;inset:0;z-index:60;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;display:none}
 #tc button{font-family:inherit;color:#fff;border:2px solid rgba(255,255,255,.55);background:rgba(20,30,60,.45);backdrop-filter:blur(3px);border-radius:50%;position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;touch-action:none;padding:0}
-#tc .tb b{font-size:15px}#tc .tb small{font-size:9px;opacity:.8}
+#tc .tb b{font-size:calc(15px*var(--bs,1))}#tc .tb small{font-size:calc(9px*var(--bs,1));opacity:.8}
 #tc button.on{background:rgba(255,200,40,.6);border-color:#fff;transform:scale(.94)}
-#tcThrow{width:104px;height:104px;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));background:rgba(255,90,40,.5)!important}
-#tcDive{width:104px;height:128px;border-radius:52px!important;right:max(18px,env(safe-area-inset-right));bottom:calc(max(18px,env(safe-area-inset-bottom)) + 112px);background:rgba(40,140,255,.45)!important}
-#tcDive small{font-size:9px;opacity:.85;text-align:center;margin-top:4px}
-#tcPick{width:76px;height:76px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:max(18px,env(safe-area-inset-bottom))}
-#tcJump{width:76px;height:76px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 92px)}
+#tcAct{position:absolute;inset:0;pointer-events:none}
+#tcAct button{pointer-events:auto}
+#tcThrow{background:rgba(255,90,40,.5)!important}
+#tcDive{background:rgba(40,140,255,.45)!important}
+#tcDive small{opacity:.85;text-align:center;margin-top:4px}
 #tcPause{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:44px;height:44px;font-size:18px}
 #tcHint{position:absolute;left:50%;bottom:calc(max(6px,env(safe-area-inset-bottom)) + 34px);transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none;animation:tcH 8s forwards}@keyframes tcH{0%,80%{opacity:1}100%{opacity:0}}
 #tcSens{top:calc(max(10px,env(safe-area-inset-top)) + 52px);right:max(10px,env(safe-area-inset-right));width:44px;height:44px;font-size:11px}
 #tcSensP{display:none;position:absolute;top:calc(max(10px,env(safe-area-inset-top)) + 52px);right:calc(max(10px,env(safe-area-inset-right)) + 52px);align-items:center;gap:8px;background:rgba(10,16,36,.85);border:1px solid rgba(255,255,255,.4);border-radius:12px;padding:8px 12px;color:#fff;font-size:12px}
 #tcSensP input{width:150px;height:28px}
 #tcBase{display:none;position:absolute;width:116px;height:116px;margin:-58px 0 0 -58px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);pointer-events:none}
+body.tcEditing #menu,body.tcEditing #start,body.tcEditing #hud{display:none!important}
+#tcEditBg{display:none;position:fixed;inset:0;z-index:55;background:linear-gradient(#0c1530,#060a18);color:rgba(255,255,255,.25);font-size:14px;text-align:center}
+#tcEditBg:before{content:'＋';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:30px}
+#tcEditBg span{position:absolute;left:50%;top:58%;transform:translateX(-50%);white-space:nowrap}
+body.tcEditing #tcEditBg{display:block}
+#tc.edit button.tb{outline:2px dashed rgba(255,255,255,.55);outline-offset:3px;cursor:grab}
+#tc.edit button.tb.sel{outline:3px solid #ffd23f;background-color:rgba(255,210,63,.25)}
+#tc.edit #tcPause,#tc.edit #tcSens,#tc.edit #tcSensP,#tc.edit #tcHint,#tc.edit #tcBase{display:none!important}
+#tcEditBar{display:none;position:absolute;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:3;background:rgba(10,16,36,.92);border:1px solid rgba(255,255,255,.4);border-radius:14px;padding:8px 12px;color:#fff;font-size:12px;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;max-width:92vw;touch-action:auto}
+#tc.edit #tcEditBar{display:flex}
+#tcEditBar button{position:static!important;width:auto!important;height:auto!important;border-radius:10px!important;padding:6px 12px!important;font-size:12px;display:inline-block!important}
+#tcEditBar input{width:130px}
+#tcBase:after{content:'';position:absolute;left:50%;top:50%;width:calc(116px*var(--td,.6));height:calc(116px*var(--td,.6));transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(255,255,255,.35)}
 #tcKnob{position:absolute;left:50%;top:50%;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.5);transform:translate(-50%,-50%)}
 #tcRot{display:none;position:fixed;inset:0;background:rgba(5,8,20,.92);color:#fff;font-size:22px;align-items:center;justify-content:center;text-align:center}
 @media (orientation:portrait){body.touch #tcRot{display:flex}}
 body.touch{overscroll-behavior:none}body.touch #hint{display:none}body.touch #state{right:auto;left:50%;transform:translateX(-50%);bottom:10px;font-size:12px;max-width:44vw;text-align:center}body.touch #start{-webkit-tap-highlight-color:transparent}
-@media (max-height:500px){#tcThrow{width:88px;height:88px}#tcDive{width:88px;height:108px;border-radius:44px!important;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 96px);right:max(14px,env(safe-area-inset-right))}#tcThrow{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom))}#tcPick,#tcJump{width:62px;height:62px;right:calc(max(14px,env(safe-area-inset-right)) + 100px)}#tcJump{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 76px)}#tcPick{bottom:max(14px,env(safe-area-inset-bottom))}#tc .tb b{font-size:13px}#tcDive small{font-size:8px}}
+@media (max-height:500px){#tc .tb b{font-size:calc(13px*var(--bs,1))}#tcDive small{font-size:calc(8px*var(--bs,1))}}
 </style></head>
 <body>
 <div id="ldScr"><div id="ldT">DIVEBALL</div><div id="ldB"><i></i></div><div id="ldM">読み込み中…</div></div>
@@ -672,7 +685,7 @@ body.touch{overscroll-behavior:none}body.touch #hint{display:none}body.touch #st
 <div id="menuGacha" style="display:none"><h2>ガチャ</h2><div class="msTop"><div class="msCoin">🪙 <b id="gcCoin">0</b></div><div class="msCoin" id="gcPity" style="border-color:#ff4dd8;background:rgba(255,77,216,.12)"></div></div><div id="gcSel"></div><button class="gcArr" id="gcPrev" style="display:none">◀</button><button class="gcArr" id="gcNext" style="display:none">▶</button><div class="msNote" id="gcHint" style="display:none;text-align:center;color:#ffe27a;font-weight:700"></div><div id="gcDetail" style="display:none"><h3 id="gcTitle"></h3><div class="gcPick" id="gcPick"></div><div class="pkDots" id="gcPkDots"></div><div class="msNote" id="gcPkHint" style="display:none;text-align:center;margin:-4px 0 6px;color:#ffe27a">👆 カードをタップすると、ステータスとスキルの詳細が見られる</div><div class="gcBtns"><button id="gc1">1回引く<small>🪙 100</small></button><button id="gc10">10連<small>🪙 900（レア以上1枚保証）</small></button></div><button class="gcLstBtn" id="gcLstBtn">📖 排出キャラ一覧</button><div id="gcLst" style="display:none"><div class="msTabs" id="gcLstTabs"></div><div class="msNote" id="gcLstNote"></div><div id="gcLstGrid"></div><div id="gcLstDet"></div></div><div id="gcOut"></div><div class="msNote" id="gcRates"></div></div><div class="lgBtns"><button class="mbtn set" id="gcBack">← もどる</button></div></div>
 <div id="menuSquad" style="display:none"><h2>スカッド</h2><div class="sqTop"><div class="msCoin">チーム総合 <b id="sqOvr">0</b></div><div class="msNote" id="sqNote">ポジションを選んで、右の手持ち選手から入れ替える（選手を長押ししてポジションへドラッグ、ポジション同士のドラッグで入れ替えもできる）</div></div><div class="sqWrap"><div><div class="sqPitch" id="sqPitch"></div><div id="sqDet"></div></div><div><div class="msNote" id="sqListT"></div><div id="sqList"></div></div></div><div class="lgBtns"><button class="mbtn set" id="sqAuto">⚡ おまかせ編成（総合が高い順）</button><button class="mbtn set" id="sqBack">← もどる</button></div></div>
 <div id="menuPrac" style="display:none"><h2 id="prTitle">練習</h2><div class="msNote" id="prNote">使う選手を選んで「開始」（練習ではポジションによる能力ダウンはなし）</div><div class="sqWrap"><div><div id="prDet"></div></div><div><div class="msNote" id="prListT">手持ちの選手</div><div id="prList"></div></div></div><div class="lgBtns"><button class="mbtn" id="prGo">この選手で開始</button><button class="mbtn set" id="prBack">← 練習メニューへ</button></div></div>
-<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div><div id="verTag">v20.13</div></div>
+<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">スマホ：ダッシュの判定<b id="tdVal">60%</b></div><input id="tdR" type="range" min="30" max="100" step="5" value="60"><div class="setNote">スティックを円の何割より外へ倒すとダッシュするか（小さいほどダッシュが出やすい）</div></div><div class="setCard"><div class="setHead">スマホ：遅いボールを自動で拾う<b id="apVal"></b></div><div class="handRow"><button id="apOn">オン</button><button id="apOff">オフ</button></div><input id="apR" type="range" min="2" max="15" step="1" value="6"><div class="setNote">拾える範囲に入った、この速さ（m/s）以下のボールを、ボタンなしで自動で拾う。大きいほど速いボールも拾う</div></div><div class="setCard"><div class="setHead">スマホ：エイムアシスト<b id="aaVal"></b></div><div class="handRow"><button id="aa0">オフ</button><button id="aa1">弱</button><button id="aa2">中</button><button id="aa3">強</button></div><div class="setNote">投げる向きが味方やゴールに近いとき、少しだけ自動で向きを寄せる（溜めの少ない押し出しには効かない）</div></div><div class="setCard"><div class="setHead">スマホ：ボタンの配置と大きさ</div><div class="handRow"><button id="tcEdBtn">配置を編集</button><button id="tcEdAll">全部を初期位置に戻す</button></div><div class="setNote">ボタン（投げる・ダイブ・ジャンプ・拾う）を1つずつドラッグで動かして、大きさもそれぞれ変えられる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div><div id="verTag">v20.17</div></div>
 <div id="result"><div class="rTime">TIME UP</div><div class="rV" id="rVerdict"></div><div class="rScore"><span class="b">BLUE</span><b id="rb">0</b><i>-</i><b id="rr">0</b><span class="r">RED</span></div><div id="rLeague" style="display:none"></div><div id="rMission" style="display:none"></div><ul id="rGoals"></ul><div id="rStats"></div><div class="rBtns"><button id="rAgain">もう一度</button><button id="rMenu">メニューへ</button></div></div>
 <div id="start"><div id="stL"><div id="logo"><svg viewBox="0 0 110 100" aria-hidden="true"><g stroke-linecap="round" fill="none"><path d="M4 30h30" stroke="#ff7a00" stroke-width="6"/><path d="M0 50h28" stroke="#ffb41f" stroke-width="6"/><path d="M8 70h26" stroke="#ff4d1f" stroke-width="6"/></g><g transform="rotate(-18 72 50)"><circle cx="72" cy="50" r="34" fill="#fff" stroke="#0a1226" stroke-width="4"/><path d="M72 36l13 9-5 15H64l-5-15z" fill="#0a1226"/><path d="M72 36V18M85 45l17-6M80 60l10 15M64 60L54 75M59 45L42 39" stroke="#0a1226" stroke-width="3.5" fill="none"/></g></svg><div id="logoT"><span class="a">DIVE</span><span class="b">BALL</span></div></div><p id="tag">5v5 ・ 投げて 飛んで 守れ</p><div id="roomBox" style="display:none"><div class="rbLbl">ROOM CODE</div><div class="rbCode"><b id="roomCode"></b><button id="rbCopy" class="rbBtn">コピー</button></div><div class="rbUrl"><input id="roomUrl" readonly onclick="this.select()"><button id="rbCopyU" class="rbBtn">URLコピー</button></div></div><div id="modeBox" style="display:none"></div><p id="startMsg">ポジションを選んで「試合開始」</p><p id="formTxt" style="font-size:13px">図の選手カードをクリックしてポジションを選ぼう（青＝あなたのチーム、赤＝相手）</p><div id="cardBox"></div><div id="enemyBox" style="display:none"></div><button id="startBtn">試合開始</button><button id="sqChg" style="display:none">スカッド変更</button><button id="backMenu">← メニューへ</button><button id="quitBtn" style="display:none">■ 試合を中断してメニューへ</button><p style="font-size:13px">青チーム（あなた）は奥の ＋Z ゴールを狙おう ／ Shift：ダイビング（パスカット）</p><div id="sensBox">マウス感度 <input id="sens" type="range" min="0.1" max="4" step="0.05" value="1"> <span id="sensVal">1.00x</span><div id="rawInfo" style="font-size:12px;opacity:.8;margin-top:4px"></div></div></div><div id="stR"><div id="posBox"></div></div></div>
 <div id="plModal" style="display:none"><div class="plMBox"><button class="plX" id="plX" aria-label="閉じる">✕</button><button class="plNav l" id="plPrev" aria-label="前の選手">◀</button><button class="plNav r" id="plNext" aria-label="次の選手">▶</button><div id="plDet"></div></div></div>
@@ -2611,6 +2624,10 @@ addEventListener('mouseup',e=>{
 });
 
 /* ===== タッチ操作（スマホ/タブレット）。PCではそのまま。?touch=1 で強制ON ===== */
+const TS={dash:60,btn:{},auto:true,autoSpd:6,assist:2};try{const o=JSON.parse(localStorage.getItem('tcset')||'{}');if(o.dash>=30&&o.dash<=100)TS.dash=o.dash;if(typeof o.auto==='boolean')TS.auto=o.auto;if(o.autoSpd>=2&&o.autoSpd<=15)TS.autoSpd=o.autoSpd;if(o.assist>=0&&o.assist<=3)TS.assist=o.assist|0;const nn=x=>typeof x==='number'&&isFinite(x);for(const k of['throw','dive','jump','pick']){const v=o.btn&&o.btn[k];if(v){TS.btn[k]={};if(nn(v.r))TS.btn[k].r=v.r;if(nn(v.b))TS.btn[k].b=v.b;if(nn(v.s)&&v.s>=0.5&&v.s<=2)TS.btn[k].s=v.s}}}catch(e){}
+function tsApply(){document.documentElement.style.setProperty('--td',TS.dash/100);$('tdR').value=TS.dash;$('tdVal').textContent=TS.dash+'%';$('apOn').classList.toggle('on',TS.auto);$('apOff').classList.toggle('on',!TS.auto);$('apR').value=TS.autoSpd;$('apR').disabled=!TS.auto;$('apVal').textContent=TS.auto?('〜'+TS.autoSpd+'m/s'):'オフ';for(let i=0;i<4;i++)$('aa'+i).classList.toggle('on',TS.assist===i);$('aaVal').textContent=['オフ','弱','中','強'][TS.assist]}
+function tsSave(){try{localStorage.setItem('tcset',JSON.stringify(TS))}catch(e){}tsApply()}
+$('tdR').addEventListener('input',e=>{TS.dash=+e.target.value;tsSave()});$('apOn').onclick=()=>{TS.auto=true;tsSave()};$('apOff').onclick=()=>{TS.auto=false;tsSave()};$('apR').addEventListener('input',e=>{TS.autoSpd=+e.target.value;tsSave()});for(let i=0;i<4;i++)$('aa'+i).onclick=()=>{TS.assist=i;tsSave()};tsApply();
 const TOUCH=(matchMedia('(pointer:coarse)').matches&&!matchMedia('(pointer:fine)').matches)||/[?&]touch=1/.test(location.search);
 if(TOUCH){(()=>{
   document.body.classList.add('touch');
@@ -2626,13 +2643,20 @@ if(TOUCH){(()=>{
   };
   const tc=document.createElement('div');tc.id='tc';
   tc.innerHTML='<div id="tcBase"><i id="tcKnob"></i></div><button id="tcPause" type="button">⏸</button><button id="tcSens" type="button">感度</button><div id="tcSensP"><input id="tcSensR" type="range" min="0.1" max="4" step="0.05"><span id="tcSensV"></span></div>'
-   +'<button id="tcThrow" class="tb" type="button"><b>投げる</b><small>長押し=チャージ</small></button>'
+   +'<div id="tcAct"><button id="tcThrow" class="tb" type="button"><b>投げる</b><small>長押し=チャージ</small></button>'
    +'<button id="tcPick" class="tb" type="button"><b>拾う</b></button>'
    +'<button id="tcJump" class="tb" type="button"><b>ジャンプ</b></button>'
-   +'<button id="tcDive" class="tb" type="button"><b>ダイブ</b><small>投げるから↑<br>スワイプで押し出し</small></button>'
+   +'<button id="tcDive" class="tb" type="button"><b>ダイブ</b><small>投げるから↑<br>スワイプで押し出し</small></button></div>'
    +'<div id="tcRot">📱 横向きにしてね</div>';
   document.body.appendChild(tc);
-  const hn=document.createElement('div');hn.id='tcHint';hn.textContent='左：スティック（端まで倒すとダッシュ）／右：ドラッグで視点／投げる長押しでチャージ';tc.appendChild(hn);
+  const bgE=document.createElement('div');bgE.id='tcEditBg';bgE.innerHTML='<span>ここにゲーム画面が出る。ボタンをドラッグで動かそう</span>';document.body.appendChild(bgE);
+  // ---- ボタンの配置と大きさ（1つずつ自由に）
+  const BK={tcThrow:'throw',tcDive:'dive',tcPick:'pick',tcJump:'jump'},BN={throw:'投げる',dive:'ダイブ',pick:'拾う',jump:'ジャンプ'};
+  const DEF=k=>{const sm=innerHeight<500;return({throw:sm?{r:14,b:14,w:88,h:88}:{r:18,b:18,w:104,h:104},dive:sm?{r:14,b:110,w:88,h:108}:{r:18,b:130,w:104,h:128},pick:sm?{r:114,b:14,w:62,h:62}:{r:136,b:18,w:76,h:76},jump:sm?{r:114,b:90,w:62,h:62}:{r:136,b:110,w:76,h:76}})[k]};
+  function bGeo(k){const d=DEF(k),v=TS.btn[k]||{},s=v.s||1,w=d.w*s,h=d.h*s;let r=v.r!==undefined?v.r:d.r,b=v.b!==undefined?v.b:d.b;r=Math.max(0,Math.min(innerWidth-w,r));b=Math.max(0,Math.min(innerHeight-h,b));return{r,b,w,h,s}}
+  function applyBtns(){for(const id in BK){const k=BK[id],g=bGeo(k),e=$(id);e.style.width=g.w+'px';e.style.height=g.h+'px';e.style.right='calc('+g.r+'px + env(safe-area-inset-right,0px))';e.style.bottom='calc('+g.b+'px + env(safe-area-inset-bottom,0px))';e.style.borderRadius=k==='dive'?(g.w/2)+'px':'50%';e.style.setProperty('--bs',g.s)}}
+  addEventListener('resize',applyBtns);
+  const hn=document.createElement('div');hn.id='tcHint';hn.textContent='左：スティック（大きく倒すとダッシュ）／右：ドラッグで視点／投げる長押しでチャージ';tc.appendChild(hn);
   const base=$('tcBase'),knob=$('tcKnob');
   const kev=(t,c)=>window.dispatchEvent(new KeyboardEvent(t,{code:c,key:c,bubbles:true,cancelable:true}));
   const mev=(t,b)=>window.dispatchEvent(new MouseEvent(t,{button:b,bubbles:true,cancelable:true}));
@@ -2645,7 +2669,7 @@ if(TOUCH){(()=>{
   function setMove(dx,dy){
     const l=Math.hypot(dx,dy),th=R*0.25;
     keys[bind.fw]=dy<-th;keys[bind.bk]=dy>th;keys[bind.lf]=dx<-th;keys[bind.rt]=dx>th;
-    keys[bind.sprint]=l>R*0.92; // スティックを端まで倒すとダッシュ
+    keys[bind.sprint]=l>R*TS.dash/100; // スティックを円の6割より外まで倒すとダッシュ
   }
   function look(dx,dy,fine){
     if(!locked||waitFrz)return;
@@ -2659,10 +2683,10 @@ if(TOUCH){(()=>{
   }
   function show(on){tc.style.display=on?'block':'none';$('tcSens').style.display=(mode==='match')?'none':''; // 感度ボタンは練習系のときだけ（試合中は設定画面から）
     if(!on||mode==='match'){if(!on)relAll();$('tcSensP').style.display='none'}}
-  show(false);
+  show(false);applyBtns();
   document.addEventListener('pointerlockchange',()=>show(locked));
   tc.addEventListener('touchstart',e=>{
-    if(e.target.closest&&e.target.closest('#tcSensP'))return; // 感度スライダーは普通に触れる
+    if(editing||(e.target.closest&&e.target.closest('#tcSensP')))return; // 編集中・感度スライダーは普通に触れる
     e.preventDefault();
     for(const t of e.changedTouches){
       const b=t.target.closest&&t.target.closest('button');
@@ -2677,7 +2701,7 @@ if(TOUCH){(()=>{
     }
   },{passive:false});
   tc.addEventListener('touchmove',e=>{
-    if(e.target.closest&&e.target.closest('#tcSensP'))return;
+    if(editing||(e.target.closest&&e.target.closest('#tcSensP')))return;
     e.preventDefault();
     for(const t of e.changedTouches){
       const s=T[t.identifier];if(!s)continue;
@@ -2699,7 +2723,7 @@ if(TOUCH){(()=>{
     }
   },{passive:false});
   const end=e=>{
-    if(e.target.closest&&e.target.closest('#tcSensP'))return;
+    if(editing||(e.target.closest&&e.target.closest('#tcSensP')))return;
     e.preventDefault();
     for(const t of e.changedTouches){
       const s=T[t.identifier];if(!s)continue;
@@ -2711,12 +2735,60 @@ if(TOUCH){(()=>{
   $('tcSensR').addEventListener('input',e=>{setSens(parseFloat(e.target.value));$('tcSensV').textContent=sens.toFixed(2)+'x'});
   tc.addEventListener('touchend',end,{passive:false});tc.addEventListener('touchcancel',end,{passive:false});
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&locked)document.exitPointerLock()});
+  // ---- 配置の編集モード
+  let editing=false,selK=null,drag=null;
+  const bar=document.createElement('div');bar.id='tcEditBar';
+  bar.innerHTML='<b id="tcEdName">ボタンをタップで選ぶ／ドラッグで移動</b><label>大きさ <input id="tcEdSz" type="range" min="50" max="200" step="5" disabled> <span id="tcEdSv"></span></label><button id="tcEdOne" type="button">この1つを初期位置に</button><button id="tcEdDone" type="button">完了</button>';
+  tc.appendChild(bar);
+  function selUi(){for(const id in BK)$(id).classList.toggle('sel',BK[id]===selK);$('tcEdName').textContent=selK?('選択中：'+BN[selK]):'ボタンをタップで選ぶ／ドラッグで移動';const z=$('tcEdSz');z.disabled=!selK;if(selK){const g=bGeo(selK);z.value=Math.round(g.s*100);$('tcEdSv').textContent=Math.round(g.s*100)+'%'}else $('tcEdSv').textContent=''}
+  function edOn(){editing=true;relAll();document.body.classList.add('tcEditing');tc.classList.add('edit');tc.style.display='block';selK=null;applyBtns();selUi()}
+  function edOff(){editing=false;document.body.classList.remove('tcEditing');tc.classList.remove('edit');if(!locked)tc.style.display='none';tsSave()}
+  window.tcEdit=()=>edOn();
+  window.tcResetAll=()=>{TS.btn={};tsSave();applyBtns()};
+  $('tcEdDone').addEventListener('click',edOff);
+  $('tcEdOne').addEventListener('click',()=>{if(!selK)return;delete TS.btn[selK];tsSave();applyBtns();selUi()});
+  $('tcEdSz').addEventListener('input',e=>{if(!selK)return;const g=bGeo(selK);(TS.btn[selK]=TS.btn[selK]||{}).s=(+e.target.value)/100;if(TS.btn[selK].r===undefined){TS.btn[selK].r=g.r;TS.btn[selK].b=g.b}applyBtns();$('tcEdSv').textContent=e.target.value+'%';tsSave()});
+  for(const id in BK){const el=$(id),k=BK[id];
+    el.addEventListener('pointerdown',e=>{if(!editing)return;e.preventDefault();selK=k;selUi();const g=bGeo(k);drag={id:e.pointerId,x:e.clientX,y:e.clientY,r:g.r,b:g.b,k};try{el.setPointerCapture(e.pointerId)}catch(_){}});
+    el.addEventListener('pointermove',e=>{if(!editing||!drag||drag.id!==e.pointerId)return;const g=bGeo(k),d=DEF(k),s=(TS.btn[k]&&TS.btn[k].s)||1,w=d.w*s,h=d.h*s;
+      const r=Math.max(0,Math.min(innerWidth-w,drag.r-(e.clientX-drag.x))),b=Math.max(0,Math.min(innerHeight-h,drag.b-(e.clientY-drag.y)));
+      const o=TS.btn[k]=TS.btn[k]||{};o.r=r;o.b=b;applyBtns()});
+    el.addEventListener('pointerup',e=>{if(drag&&drag.id===e.pointerId){drag=null;tsSave()}});
+    el.addEventListener('pointercancel',()=>{drag=null;tsSave()})}
 })()}
+window.tcEdit=window.tcEdit||(()=>msg('スマホ・タブレットの画面で使えるよ（URLの末尾に ?touch=1 を付けるとPCでも試せる）'));
+window.tcResetAll=window.tcResetAll||(()=>{TS.btn={};tsSave()});
+$('tcEdBtn').addEventListener('click',()=>window.tcEdit());$('tcEdAll').addEventListener('click',()=>{window.tcResetAll();msg('ボタンの配置を初期位置に戻した')});
+/* スマホ: エイムアシスト（水平方向だけ、味方かゴールへ少し寄せる） */
+function aimAssist(dir,p){
+  if(!TOUCH||!TS.assist||p<0.2)return;
+  const lv=[0,{c:8,k:.6},{c:12,k:.85},{c:18,k:1}][TS.assist],cone=lv.c*Math.PI/180;
+  const hl=Math.hypot(dir.x,dir.z);if(hl<0.05)return;
+  const gs=net.role==='guest',mt=gs?'R':'B',mr=gs?net.myRole:playerRole,att=gs?-1:1;
+  const px=player.pos.x,pz=player.pos.z,a0=Math.atan2(dir.z,dir.x),wr=a=>{while(a>Math.PI)a-=2*Math.PI;while(a<-Math.PI)a+=2*Math.PI;return a};
+  const spd=7+26*p;let best=null,bd=cone;
+  for(const d of ORDER){const u=d.userData;if(!d.visible||u.team!==mt||u.role===mr)continue;
+    const dx=d.position.x-px,dz=d.position.z-pz,D=Math.hypot(dx,dz);if(D<4||D>40)continue;
+    const t=D/spd*0.8,tx=dx+(u.vel?u.vel.x:0)*t,tz=dz+(u.vel?u.vel.z:0)*t;
+    const df=wr(Math.atan2(tz,tx)-a0);if(Math.abs(df)<bd){bd=Math.abs(df);best=df}}
+  if(best===null){ // 味方がいなければ、ゴールの枠へ
+    const gz=att*HL,dz=gz-pz;if(dz*dir.z>0){const xg=px+dir.x/dir.z*dz;if(Math.abs(xg)<GW+3){const tx=Math.max(-GW+0.6,Math.min(GW-0.6,xg))-px;const df=wr(Math.atan2(dz,tx)-a0);if(Math.abs(df)<cone)best=df}}}
+  if(best===null)return;
+  const a=a0+best*lv.k;dir.x=Math.cos(a)*hl;dir.z=Math.sin(a)*hl;
+}
+/* スマホ: 遅いボールを自動で拾う（右クリックと同じ処理） */
+function autoPick(){
+  if(!TOUCH||!TS.auto||!locked||!matchStarted||matchOver||phase!=='play'||waitFrz)return;
+  if(ball.held||ball.ai||pickCD>0||diveT>0||diveRec>0)return;
+  if(Math.hypot(ball.v.x,ball.v.y,ball.v.z)>TS.autoSpd)return;
+  if(inPick())window.dispatchEvent(new MouseEvent('mousedown',{button:2,bubbles:true,cancelable:true}));
+}
 function throwBall(p){
   const kk=phase==='kick';endKick();
   const dir=new THREE.Vector3();camera.getWorldDirection(dir);
   dir.y+=0.12;
   if(kk&&dir.z>0){dir.z=-dir.z;msg('キックオフは後ろにしかパスできない')} // 青の攻める向きは＋Z。キックオフは後ろ（−Z）へ
+  aimAssist(dir,p);
   {const itp=intimNear(player.pos.x,player.pos.z,player);const tsp=teaseNear(player.pos.x,player.pos.z,'B');const j=((has(PSK,'buildup')||has(PSK,'vgpass'))?0:PMOD().jit*(has(PSK,'longkick')&&p>=0.5?0.3:1))+(itp?0.16:0)+(tsp?0.12:0);if(itp)msg('威圧されている…');else if(tsp)msg('からかわれている…');if(j>0){dir.x+=(Math.random()-0.5)*j;dir.y+=(Math.random()-0.5)*j}} // パス精度が低いと少しブレる
   const vg=has(PSK,'vgpass')&&p<0.85;if(vg)dir.y=-0.03;
   dir.normalize();
@@ -3365,7 +3437,7 @@ function loop(){
   if(net.role==='host'&&net.connected&&mode==='match'&&matchStarted&&!matchOver&&!htOn&&net.entered){ // オンラインのポーズ持ち時間（各60秒。0で反則負け）
     if(!locked)net.pz.h-=dt;if(net.gPz)net.pz.g-=dt;
     if(net.pz.h<=0)forfeit('B');else if(net.pz.g<=0)forfeit('R')}
-  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);oppMark(G);mmUpdate(dt);ballInd();
+  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);oppMark(G);mmUpdate(dt);ballInd();autoPick();
   if(playing&&phase==='play'&&resetTimer<=0&&mode==='match'&&!G){matchT-=dt;if(matchT<=0){matchT=0;if(half===1)halftime();else endMatch()}}
   // ロックが0.4秒以上外れ続けたときだけ「ロック喪失」と判定（一瞬のブレでは何もしない）
   if(locked&&document.pointerLockElement!==renderer.domElement){
