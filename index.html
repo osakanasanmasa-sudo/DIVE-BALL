@@ -28,6 +28,10 @@ canvas{display:block}
 #stmL{position:absolute;top:calc(50% + 94px);left:calc(50% + 56px);font-size:10px;letter-spacing:.1em;opacity:.8;display:none}
 #dvL{position:absolute;top:calc(50% + 82px);left:calc(50% + 56px);font-size:10px;letter-spacing:.1em;opacity:.8;display:none}
 #timer{position:absolute;top:52px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);padding:2px 16px;border-radius:999px;font-size:20px;font-weight:700;letter-spacing:2px}
+#bInd{position:absolute;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffd37a,#ff9a00 60%,#b45f00);border:2px solid #fff;box-shadow:0 0 10px rgba(255,160,0,.9);display:none;pointer-events:none;z-index:5;text-align:center;font:700 10px/34px sans-serif;color:#1a0d00;text-shadow:0 0 2px #fff}
+#bInd u{position:absolute;left:50%;top:50%;width:0;height:0;border-left:9px solid #ffd23f;border-top:7px solid transparent;border-bottom:7px solid transparent;margin:-7px 0 0 -9px;filter:drop-shadow(0 0 3px #000)}
+#bInd b{position:relative;font-weight:700}
+#mmap{position:absolute;top:max(10px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left));width:160px;height:80px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.28);border-radius:8px;display:none}
 #hint{position:absolute;bottom:14px;left:14px;font-size:13px;background:rgba(0,0,0,.5);padding:8px 12px;border-radius:8px;line-height:1.6}
 #state{position:absolute;bottom:14px;right:14px;font-size:14px;background:rgba(0,0,0,.5);padding:8px 12px;border-radius:8px}
 #goal{position:absolute;top:30%;left:0;right:0;text-align:center;font-size:15vw;font-weight:900;font-style:italic;color:#ffe14a;-webkit-text-stroke:3px #d4300f;text-shadow:0 0 30px #ff8a00,0 8px 0 #7a1a00;opacity:0;transform:scale(.3)}
@@ -604,23 +608,29 @@ body.inMenu #hud{visibility:hidden}
 #tc .tb b{font-size:15px}#tc .tb small{font-size:9px;opacity:.8}
 #tc button.on{background:rgba(255,200,40,.6);border-color:#fff;transform:scale(.94)}
 #tcThrow{width:104px;height:104px;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));background:rgba(255,90,40,.5)!important}
-#tcPick{width:72px;height:72px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:max(18px,env(safe-area-inset-bottom))}
-#tcJump{width:72px;height:72px;right:max(26px,env(safe-area-inset-right));bottom:calc(max(18px,env(safe-area-inset-bottom)) + 118px)}
-#tcDive{width:72px;height:72px;right:calc(max(18px,env(safe-area-inset-right)) + 100px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 100px);background:rgba(40,140,255,.45)!important}
+#tcDive{width:104px;height:128px;border-radius:52px!important;right:max(18px,env(safe-area-inset-right));bottom:calc(max(18px,env(safe-area-inset-bottom)) + 112px);background:rgba(40,140,255,.45)!important}
+#tcDive small{font-size:9px;opacity:.85;text-align:center;margin-top:4px}
+#tcPick{width:76px;height:76px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:max(18px,env(safe-area-inset-bottom))}
+#tcJump{width:76px;height:76px;right:calc(max(18px,env(safe-area-inset-right)) + 118px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 92px)}
 #tcPause{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:44px;height:44px;font-size:18px}
 #tcHint{position:absolute;left:50%;bottom:calc(max(6px,env(safe-area-inset-bottom)) + 34px);transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none;animation:tcH 8s forwards}@keyframes tcH{0%,80%{opacity:1}100%{opacity:0}}
+#tcSens{top:calc(max(10px,env(safe-area-inset-top)) + 52px);right:max(10px,env(safe-area-inset-right));width:44px;height:44px;font-size:11px}
+#tcSensP{display:none;position:absolute;top:calc(max(10px,env(safe-area-inset-top)) + 52px);right:calc(max(10px,env(safe-area-inset-right)) + 52px);align-items:center;gap:8px;background:rgba(10,16,36,.85);border:1px solid rgba(255,255,255,.4);border-radius:12px;padding:8px 12px;color:#fff;font-size:12px}
+#tcSensP input{width:150px;height:28px}
 #tcBase{display:none;position:absolute;width:116px;height:116px;margin:-58px 0 0 -58px;border-radius:50%;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);pointer-events:none}
 #tcKnob{position:absolute;left:50%;top:50%;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.5);transform:translate(-50%,-50%)}
 #tcRot{display:none;position:fixed;inset:0;background:rgba(5,8,20,.92);color:#fff;font-size:22px;align-items:center;justify-content:center;text-align:center}
 @media (orientation:portrait){body.touch #tcRot{display:flex}}
 body.touch{overscroll-behavior:none}body.touch #hint{display:none}body.touch #state{right:auto;left:50%;transform:translateX(-50%);bottom:10px;font-size:12px;max-width:44vw;text-align:center}body.touch #start{-webkit-tap-highlight-color:transparent}
-@media (max-height:500px){#tcThrow{width:88px;height:88px}#tcPick,#tcJump,#tcDive{width:60px;height:60px}#tcPick{right:calc(max(14px,env(safe-area-inset-right)) + 100px)}#tcJump{bottom:calc(max(18px,env(safe-area-inset-bottom)) + 98px)}#tcDive{right:calc(max(18px,env(safe-area-inset-right)) + 84px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 84px)}#tc .tb b{font-size:13px}}
+@media (max-height:500px){#tcThrow{width:88px;height:88px}#tcDive{width:88px;height:108px;border-radius:44px!important;bottom:calc(max(14px,env(safe-area-inset-bottom)) + 96px);right:max(14px,env(safe-area-inset-right))}#tcThrow{right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom))}#tcPick,#tcJump{width:62px;height:62px;right:calc(max(14px,env(safe-area-inset-right)) + 100px)}#tcJump{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 76px)}#tcPick{bottom:max(14px,env(safe-area-inset-bottom))}#tc .tb b{font-size:13px}#tcDive small{font-size:8px}}
 </style></head>
 <body>
 <div id="ldScr"><div id="ldT">DIVEBALL</div><div id="ldB"><i></i></div><div id="ldM">読み込み中…</div></div>
 <div id="hud">
   <div id="score"><b class="b">BLUE</b> <span id="sb">0</span> - <span id="sr">0</span> <b class="r">RED</b></div>
   <div id="timer">3:00</div>
+  <canvas id="mmap" width="240" height="120"></canvas>
+  <div id="bInd"><u></u><b></b></div>
   <div id="cross"></div>
   <div id="power"><i></i></div>
   <div id="cd"><i></i></div>
@@ -662,7 +672,7 @@ body.touch{overscroll-behavior:none}body.touch #hint{display:none}body.touch #st
 <div id="menuGacha" style="display:none"><h2>ガチャ</h2><div class="msTop"><div class="msCoin">🪙 <b id="gcCoin">0</b></div><div class="msCoin" id="gcPity" style="border-color:#ff4dd8;background:rgba(255,77,216,.12)"></div></div><div id="gcSel"></div><button class="gcArr" id="gcPrev" style="display:none">◀</button><button class="gcArr" id="gcNext" style="display:none">▶</button><div class="msNote" id="gcHint" style="display:none;text-align:center;color:#ffe27a;font-weight:700"></div><div id="gcDetail" style="display:none"><h3 id="gcTitle"></h3><div class="gcPick" id="gcPick"></div><div class="pkDots" id="gcPkDots"></div><div class="msNote" id="gcPkHint" style="display:none;text-align:center;margin:-4px 0 6px;color:#ffe27a">👆 カードをタップすると、ステータスとスキルの詳細が見られる</div><div class="gcBtns"><button id="gc1">1回引く<small>🪙 100</small></button><button id="gc10">10連<small>🪙 900（レア以上1枚保証）</small></button></div><button class="gcLstBtn" id="gcLstBtn">📖 排出キャラ一覧</button><div id="gcLst" style="display:none"><div class="msTabs" id="gcLstTabs"></div><div class="msNote" id="gcLstNote"></div><div id="gcLstGrid"></div><div id="gcLstDet"></div></div><div id="gcOut"></div><div class="msNote" id="gcRates"></div></div><div class="lgBtns"><button class="mbtn set" id="gcBack">← もどる</button></div></div>
 <div id="menuSquad" style="display:none"><h2>スカッド</h2><div class="sqTop"><div class="msCoin">チーム総合 <b id="sqOvr">0</b></div><div class="msNote" id="sqNote">ポジションを選んで、右の手持ち選手から入れ替える（選手を長押ししてポジションへドラッグ、ポジション同士のドラッグで入れ替えもできる）</div></div><div class="sqWrap"><div><div class="sqPitch" id="sqPitch"></div><div id="sqDet"></div></div><div><div class="msNote" id="sqListT"></div><div id="sqList"></div></div></div><div class="lgBtns"><button class="mbtn set" id="sqAuto">⚡ おまかせ編成（総合が高い順）</button><button class="mbtn set" id="sqBack">← もどる</button></div></div>
 <div id="menuPrac" style="display:none"><h2 id="prTitle">練習</h2><div class="msNote" id="prNote">使う選手を選んで「開始」（練習ではポジションによる能力ダウンはなし）</div><div class="sqWrap"><div><div id="prDet"></div></div><div><div class="msNote" id="prListT">手持ちの選手</div><div id="prList"></div></div></div><div class="lgBtns"><button class="mbtn" id="prGo">この選手で開始</button><button class="mbtn set" id="prBack">← 練習メニューへ</button></div></div>
-<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div><div id="verTag">v20.2</div></div>
+<div id="menuSet" style="display:none"><h2>設定</h2><div class="setCard"><div class="setHead">マウス感度<b id="sensVal2">1.00x（100%）</b></div><input id="sens2" type="range" min="0.1" max="4" step="0.05" value="1"><div class="setNote">0.10x（10%）〜 4.00x（400%）。1.00x が基準</div></div><div class="setCard"><div class="setHead">利き手<b id="handVal">右手</b></div><div class="handRow"><button id="handR">右利き</button><button id="handL">左利き</button></div><div class="setNote">FPS視点で、ボールを持つ手の側が変わる</div></div><div class="setCard"><div class="setHead">効果音の音量<b id="volVal">100%</b></div><input id="vol" type="range" min="0" max="1" step="0.05" value="1"><div class="setNote">0%（消音）〜 100%</div></div><div class="setCard"><div class="setHead">画質<b id="qVal"></b></div><div class="handRow"><button id="q_auto">自動</button><button id="q_high">高</button><button id="q_mid">中</button><button id="q_low">低</button></div><div class="setNote">重いときは「低」か「中」。自動はカクつくと試合中に画質を下げる</div></div><div class="setCard"><div class="setHead">キー配置<b id="kbMsg"></b></div><div class="kbGrid" id="kbGrid"></div><button class="kbReset" id="kbReset">初期設定に戻す</button><div class="setNote">クリック→変えたいキーを押す（Escでキャンセル）。同じキーを使うと入れ替わる。マウス操作は固定</div></div><div class="setCard" id="bkCard"><div class="setHead">セーブデータの引き継ぎ<b id="bkMsg"></b></div><div class="bkRow"><button class="bkBtn" id="bkMake">📤 セーブコードを作る</button><button class="bkBtn" id="bkCopy" disabled>コピー</button></div><textarea id="bkOut" class="bkTa" readonly rows="3" placeholder="ここにセーブコードが出る。コピーしてメモなどに保管しておこう"></textarea><div class="setHead" style="margin-top:12px">🕘 自動バックアップ（このブラウザ内）</div><div id="bkAuto"></div><div class="setNote">データが変わるたびに自動で控えを残す。ブラウザのデータを消すと控えも消えるので、大事なときはセーブコードも保管しよう</div><div class="setHead" style="margin-top:12px">📥 セーブコードを読み込む</div><textarea id="bkIn" class="bkTa" rows="3" placeholder="保管しておいたセーブコードをここに貼り付け"></textarea><div class="bkRow"><button class="bkBtn" id="bkCheck">コードを確認する</button><button class="bkBtn warn" id="bkApply" style="display:none">上書きして読み込む</button></div><div class="setNote" id="bkInfo">コイン・選手・スカッド・ミッション・リーグ成績・設定が入る（圧縮して短くしてある）。別のブラウザや端末に引き継ぎたいときに使う。読み込むと今のデータは上書きされる。古い形式のコードも読み込める</div></div><button class="mbtn" id="mSetBack" style="margin-top:auto">← もどる</button></div></div></div><div id="demoTag">DEMO PLAY</div><div class="ver">DIVEBALL</div><div id="verTag">v20.13</div></div>
 <div id="result"><div class="rTime">TIME UP</div><div class="rV" id="rVerdict"></div><div class="rScore"><span class="b">BLUE</span><b id="rb">0</b><i>-</i><b id="rr">0</b><span class="r">RED</span></div><div id="rLeague" style="display:none"></div><div id="rMission" style="display:none"></div><ul id="rGoals"></ul><div id="rStats"></div><div class="rBtns"><button id="rAgain">もう一度</button><button id="rMenu">メニューへ</button></div></div>
 <div id="start"><div id="stL"><div id="logo"><svg viewBox="0 0 110 100" aria-hidden="true"><g stroke-linecap="round" fill="none"><path d="M4 30h30" stroke="#ff7a00" stroke-width="6"/><path d="M0 50h28" stroke="#ffb41f" stroke-width="6"/><path d="M8 70h26" stroke="#ff4d1f" stroke-width="6"/></g><g transform="rotate(-18 72 50)"><circle cx="72" cy="50" r="34" fill="#fff" stroke="#0a1226" stroke-width="4"/><path d="M72 36l13 9-5 15H64l-5-15z" fill="#0a1226"/><path d="M72 36V18M85 45l17-6M80 60l10 15M64 60L54 75M59 45L42 39" stroke="#0a1226" stroke-width="3.5" fill="none"/></g></svg><div id="logoT"><span class="a">DIVE</span><span class="b">BALL</span></div></div><p id="tag">5v5 ・ 投げて 飛んで 守れ</p><div id="roomBox" style="display:none"><div class="rbLbl">ROOM CODE</div><div class="rbCode"><b id="roomCode"></b><button id="rbCopy" class="rbBtn">コピー</button></div><div class="rbUrl"><input id="roomUrl" readonly onclick="this.select()"><button id="rbCopyU" class="rbBtn">URLコピー</button></div></div><div id="modeBox" style="display:none"></div><p id="startMsg">ポジションを選んで「試合開始」</p><p id="formTxt" style="font-size:13px">図の選手カードをクリックしてポジションを選ぼう（青＝あなたのチーム、赤＝相手）</p><div id="cardBox"></div><div id="enemyBox" style="display:none"></div><button id="startBtn">試合開始</button><button id="sqChg" style="display:none">スカッド変更</button><button id="backMenu">← メニューへ</button><button id="quitBtn" style="display:none">■ 試合を中断してメニューへ</button><p style="font-size:13px">青チーム（あなた）は奥の ＋Z ゴールを狙おう ／ Shift：ダイビング（パスカット）</p><div id="sensBox">マウス感度 <input id="sens" type="range" min="0.1" max="4" step="0.05" value="1"> <span id="sensVal">1.00x</span><div id="rawInfo" style="font-size:12px;opacity:.8;margin-top:4px"></div></div></div><div id="stR"><div id="posBox"></div></div></div>
 <div id="plModal" style="display:none"><div class="plMBox"><button class="plX" id="plX" aria-label="閉じる">✕</button><button class="plNav l" id="plPrev" aria-label="前の選手">◀</button><button class="plNav r" id="plNext" aria-label="次の選手">▶</button><div id="plDet"></div></div></div>
@@ -1277,7 +1287,7 @@ for(const c of SQUAD)if(!sv.inv[c.id])sv.inv[c.id]=1;
 // ---- レジェンド（特殊スキル持ち。ガチャの排出対象外）----
 const LEGEND_FREE=false; // true にすると、レジェンドを最初から全員所持（テスト用）
 const mkLeg=(id,name,role,skill,a)=>{const st={spd:a[0],sta:a[1],thr:a[2],pas:a[3],dive:a[4],gk:a[5],phy:a[6]};return{id,name,role,st,ovr:calcOvr(role,st),tier:4,skill,legend:true}};
-const LEGENDS=[mkLeg('L_kino','喜納 侑哉',1,'hidive',[96,96,90,94,99,40,99]),mkLeg('L_shieki','ヒ・シエキ',0,'longcatch',[90,92,92,94,99,99,95]),mkLeg('L_shibata','柴田 拓海',4,'bird',[98,92,99,92,95,40,94]),
+const LEGENDS=[mkLeg('L_kino','喜納 侑哉',1,'hidive',[96,96,90,94,99,40,99]),mkLeg('L_shieki','ヒ・シエキ',0,'longcatch longkick',[90,92,100,94,99,104,95]),mkLeg('L_shibata','柴田 拓海',4,'bird',[98,92,99,92,95,40,94]),
   mkLeg('L_sweeney','ティム・スウィーニー',2,'buildup',[94,97,92,99,92,40,94]),mkLeg('L_persson','マルクス・ペルソン',2,'buildup',[92,98,94,98,90,40,96]),mkLeg('L_carmack','ジョン・カーマック',1,'longdive',[96,96,90,92,99,40,99]),
   mkLeg('L_kaneko','金子 健太郎',4,'blitz magnet',[102,96,104,98,94,40,96]),mkLeg('L_fukuda','福田 理人',4,'bullet aggressive',[98,94,106,92,100,40,102]),mkLeg('L_tsukiyama','築山',1,'buildup longdive',[98,100,92,96,106,40,104]),
   mkLeg('L_fujita','藤田 悠叶',1,'quickdive',[76,92,90,90,92,40,112]),mkLeg('L_sakauchi','阪内',2,'technician',[95,96,100,108,94,40,88]),mkLeg('L_oda','小田 ペン次郎',2,'intimidate',[92,94,94,94,92,40,58]),
@@ -1323,7 +1333,7 @@ function gcPull(n,bi){ // n回引く。コインが足りなければ null
   sv.pulls=(sv.pulls||0)+n;svSave();return out;
 }
 const b0sp=b=>!!b.sp;
-const SKILLS={hidive:{n:'ハイダイブ',d:'ジャンプ後のダイブでも、勢い・距離・時間が落ちない（空中でも通常ダイブと同じ）'},longcatch:{n:'ロングキャッチ',d:'ボールを取れる範囲（拾う扇の半径・ダイブキャッチ）が約1.4倍に広がる'},buildup:{n:'ビルドアップ',d:'パスがブレずに正確になり、味方からのパスを受けられる範囲も約1.5倍に広がる'},longdive:{n:'ロングリーチダイブ',d:'ダイブの飛距離が約1.5倍に伸びる'},bird:{n:'ピジョンストライク',d:'シュートにドライブ回転がかかり、ボールが鋭く落ちる軌道になる'},blitz:{n:'ブリッツカーブ',d:'右に進みながら打てば右に、左に進みながら打てば左に曲がるシュート（横に動くほど大きく曲がる）'},magnet:{n:'マグネットフィート',d:'ボールを拾う・受ける範囲が広がり、拾い直しも早くなる（キャッチとタッチが上手くなる）'},bullet:{n:'バレットハンド',d:'空中でシュートすると、速くて落ちにくい鋭く強いボールになる'},quickdive:{n:'クイックネスダイブ',d:'ボールを奪った（持った）あと3秒間、ダイブのクールタイムが半分、倒れている時間が約6割になる'},technician:{n:'テクニシャン',d:'自分が投げたボールが自分の前方の扇に入ると、右クリックなしで自動的に回収する'},ego:{n:'エゴイスト',d:'ボールを持っているとエゴイストメーターが上がり、スピード・シュート力・ダイブなどの能力が上がり、左クリックのチャージも速く、鋭い弾道になる。ボールを持てないとメーターが下がり、スピードやシュート力が大きく落ちる（0が通常。±100）。自分のシュートでゴールを決めると、12秒間メーターが80から落ちなくなる'},vgpass:{n:'ヴァーティカルグラウンダーパス',d:'溜め切らないパスが、鋭く速い（最低でも強めの速さ）正確な地を這うボールになる（フルチャージのシュートは通常どおり）'},tease:{n:'ティーズ',d:'周囲8mにいる相手チームの選手を からかって、パス精度とシュート力を落とす'},intimidate:{n:'インティミデイティング パーソン',d:'周囲7mにいる選手は、敵味方を問わずパスの精度とシュートの決定力が落ちる（本人は影響なし）'},aggressive:{n:'アグレッシブシュート',d:'ジャンプ中・ダイブ中にボールを持ってチャージすると溜まりが速い（ジャンプ中×1.5、ダイブ中×2）'}};
+const SKILLS={hidive:{n:'ハイダイブ',d:'ジャンプ後のダイブでも、勢い・距離・時間が落ちない（空中でも通常ダイブと同じ）'},longcatch:{n:'ロングキャッチ',d:'ボールを取れる範囲（拾う扇の半径・ダイブキャッチ）が約1.4倍に広がる'},buildup:{n:'ビルドアップ',d:'パスがブレずに正確になり、味方からのパスを受けられる範囲も約1.5倍に広がる'},longdive:{n:'ロングリーチダイブ',d:'ダイブの飛距離が約1.5倍に伸びる'},bird:{n:'ピジョンストライク',d:'シュートにドライブ回転がかかり、ボールが鋭く落ちる軌道になる'},blitz:{n:'ブリッツカーブ',d:'右に進みながら打てば右に、左に進みながら打てば左に曲がるシュート（横に動くほど大きく曲がる）'},magnet:{n:'マグネットフィート',d:'ボールを拾う・受ける範囲が広がり、拾い直しも早くなる（キャッチとタッチが上手くなる）'},bullet:{n:'バレットハンド',d:'空中でシュートすると、速くて落ちにくい鋭く強いボールになる'},quickdive:{n:'クイックネスダイブ',d:'ボールを奪った（持った）あと3秒間、ダイブのクールタイムが半分、倒れている時間が約6割になる'},technician:{n:'テクニシャン',d:'自分が投げたボールが自分の前方の扇に入ると、右クリックなしで自動的に回収する'},longkick:{n:'ロングキック',d:'長めのパス（溜め半分以上／AIは約18m以上）のブレが小さくなり、球速も約1割上がる。※この選手はキック（シュート力）の数値も高い'},ego:{n:'エゴイスト',d:'ボールを持っているとエゴイストメーターが上がり、スピード・シュート力・ダイブなどの能力が上がり、左クリックのチャージも速く、鋭い弾道になる。ボールを持てないとメーターが下がり、スピードやシュート力が大きく落ちる（0が通常。±100）。自分のシュートでゴールを決めると、12秒間メーターが80から落ちなくなる'},vgpass:{n:'ヴァーティカルグラウンダーパス',d:'溜め切らないパスが、鋭く速い（最低でも強めの速さ）正確な地を這うボールになる（フルチャージのシュートは通常どおり）'},tease:{n:'ティーズ',d:'周囲8mにいる相手チームの選手を からかって、パス精度とシュート力を落とす'},intimidate:{n:'インティミデイティング パーソン',d:'周囲7mにいる選手は、敵味方を問わずパスの精度とシュートの決定力が落ちる（本人は影響なし）'},aggressive:{n:'アグレッシブシュート',d:'ジャンプ中・ダイブ中にボールを持ってチャージすると溜まりが速い（ジャンプ中×1.5、ダイブ中×2）'}};
 const skList=c=>c&&c.skill?c.skill.split(' ').filter(k=>SKILLS[k]):[];
 const skillHTML=c=>skList(c).map(k=>'<div class="skBox"><b>⚡ 特殊スキル：'+SKILLS[k].n+'</b><span>'+SKILLS[k].d+'</span></div>').join('');
 function cardHTML(c,extra,i){const t=c.tier!==undefined?c.tier:tierIdx(c.ovr),pos=c.role===0?'GK':c.role===1?'CB':c.role===2?'MF':'CF';
@@ -1452,10 +1462,10 @@ function intimNear(x,z,selfD){for(const d of INT){if(d===selfD)continue;if(Math.
 function aiThrow(d,tx,tz,err,sp){
   const u=d.userData,sx=d.position.x,sz=d.position.z;
   const sk=uSk(u);
-  const itm=intimNear(sx,sz,d);tx+=(Math.random()-0.5)*err*lvk(u.team,'err',1)*mm(u).aim*((!aiShot&&(has(sk,'buildup')||has(sk,'vgpass')))?0.6:1)*(itm?2.2:1)*(teaseNear(sx,sz,u.team)?1.8:1); // ビルドアップ: パスのブレが小さい
+  const itm=intimNear(sx,sz,d);tx+=(Math.random()-0.5)*err*lvk(u.team,'err',1)*mm(u).aim*((!aiShot&&(has(sk,'buildup')||has(sk,'vgpass')))?0.6:1)*(itm?2.2:1)*(teaseNear(sx,sz,u.team)?1.8:1)*((!aiShot&&has(sk,'longkick')&&Math.hypot(tx-sx,tz-sz)>18)?0.45:1); // ビルドアップ: パスのブレが小さい
   const dx=tx-sx,dz=tz-sz,D=Math.hypot(dx,dz)||1,t=Math.max(0.35,D/(sp||20));
   let vx=dx/t*1.04,vy=(1.0-1.2+9*t*t)/t,vz=dz/t*1.04;
-  {const s0=Math.hypot(vx,vy,vz),mxs=(7+26)*mm(u).thr*(itm?0.85:1)*(teaseNear(sx,sz,u.team)?0.9:1);if(s0>mxs){const k=mxs/s0;vx*=k;vy*=k;vz*=k}} // シュート力が低いと届く強さに上限
+  {const s0=Math.hypot(vx,vy,vz),mxs=(7+26)*mm(u).thr*(itm?0.85:1)*(teaseNear(sx,sz,u.team)?0.9:1)*(has(sk,'longkick')&&!aiShot?1.12:1);if(s0>mxs){const k=mxs/s0;vx*=k;vy*=k;vz*=k}} // シュート力が低いと届く強さに上限
   const pw=Math.max(0,Math.min(1,(Math.hypot(vx,vy,vz)-7)/26)); // プレイヤーと同じ式: 速さ=7+26*溜め
   if(u.charge<pw){u.charging=true;return false} // 足りない間は溜め続ける
   ball.ai=null;ball.byPlayer=false;ball.team=u.team;ball.tid=(ball.tid||0)+1;ball.thrBy=d;ball.thrTid=ball.tid;ball.passTo=null;ball.passToPlayer=false;ball.selfPush=false;
@@ -1510,6 +1520,27 @@ function crossTarget(d){
     if(Math.abs(x)>5||gd>14||D<5||D>20)return;
     let open=99;for(const f of foes)open=Math.min(open,Math.hypot(f.x-x,f.z-z));
     if(open>bo){bo=open;best={x,z,vx,vz,o,pl,cd:0,cross:true}}
+  };
+  for(const m of AI){const mu=m.userData;if(m===d||mu.team!==u.team||mu.role===0||mu.stun>0)continue;test(m.position.x,m.position.z,mu.vel.x,mu.vel.z,m,false)}
+  if(u.team==='B'&&playerRole!==0)test(player.pos.x,player.pos.z,player.vel.x,player.vel.z,null,true);
+  return best;
+}
+/* AIの習性「サイド展開」: 中央で持ったら、外側（サイド）でフリーな味方へ高めの山なりパスで大きく振る */
+const WING_HABIT=0.7; // サイド展開をする傾向（0〜1）
+function wingTarget(d){
+  const u=d.userData,pos=d.position,att=u.att;
+  if(u.role===0||pos.z*att>HL-12)return null; // ゴールから遠いとき
+  const sideHold=Math.abs(pos.x)>7; // サイドで持っているときは、反対のサイドへ（サイドチェンジ）
+  const foes=foePos(u.team);let best=null,bs=0;
+  const test=(x,z,vx,vz,o,pl)=>{
+    const D=Math.hypot(x-pos.x,z-pos.z),lat=Math.abs(x);
+    if(lat<8||D<8||(z-pos.z)*att<-3)return; // 外側・前か横の味方だけ
+    if(sideHold){if(x*pos.x>=0||Math.abs(x-pos.x)<14||D>30)return} // 反対サイドの味方だけ
+    else if(lat<Math.abs(pos.x)+5||D>22)return;
+    let open=99;for(const f of foes)open=Math.min(open,Math.hypot(f.x-x,f.z-z));
+    if(open<4.5)return;
+    const sc=Math.min(open,8)+lat*0.3+(z-pos.z)*att*0.15;
+    if(sc>bs){bs=sc;best={x,z,vx,vz,o,pl,cd:0,wing:true}}
   };
   for(const m of AI){const mu=m.userData;if(m===d||mu.team!==u.team||mu.role===0||mu.stun>0)continue;test(m.position.x,m.position.z,mu.vel.x,mu.vel.z,m,false)}
   if(u.team==='B'&&playerRole!==0)test(player.pos.x,player.pos.z,player.vel.x,player.vel.z,null,true);
@@ -1749,6 +1780,7 @@ function aiUpdate(dt){
             const canT=u.role!==0&&u.diveCD<=0&&u.diveT<=0&&u.down<=0&&!u.trick;
             const cx=crossTarget(d),tp=throughTarget(d);
             if(cx&&u.holdT>0.5&&Math.random()<dt*5*CROSS_HABIT){doPass(d,cx,12)} // サイドからクロス
+            else if(u.holdT>0.6&&dGoal>12&&Math.random()<dt*3*WING_HABIT&&(()=>{const w=wingTarget(d);if(w){doPass(d,w,w.pl?10:(w.x*pos.x<0&&Math.hypot(w.x-pos.x,w.z-pos.z)>20?15:12));return true}return false})()){} // 中央からサイドへ高めの展開パス
             else if(tp&&u.holdT>0.45&&Math.random()<dt*5*0.8){doPass(d,tp,17)} // スルーパス（走り込む味方・あなたへ）
             else if(canT&&nf&&nearest<4.5&&nearest>0.8&&Math.random()<dt*4*trickAI.p&&(()=>{const e=escDir(pos,nf,att);aiPushDive(d,u,e[0],e[1]);trickAI.tries++;return true})()){} // 敵が近い: 横に押し出してダイブで抜ける（そのあとシュート/パス）
             else if(dGoal<17&&(clearShot||dGoal<13))doShot(d);
@@ -2593,11 +2625,11 @@ if(TOUCH){(()=>{
     return new Promise(()=>{});
   };
   const tc=document.createElement('div');tc.id='tc';
-  tc.innerHTML='<div id="tcBase"><i id="tcKnob"></i></div><button id="tcPause" type="button">⏸</button>'
+  tc.innerHTML='<div id="tcBase"><i id="tcKnob"></i></div><button id="tcPause" type="button">⏸</button><button id="tcSens" type="button">感度</button><div id="tcSensP"><input id="tcSensR" type="range" min="0.1" max="4" step="0.05"><span id="tcSensV"></span></div>'
    +'<button id="tcThrow" class="tb" type="button"><b>投げる</b><small>長押し=チャージ</small></button>'
    +'<button id="tcPick" class="tb" type="button"><b>拾う</b></button>'
    +'<button id="tcJump" class="tb" type="button"><b>ジャンプ</b></button>'
-   +'<button id="tcDive" class="tb" type="button"><b>ダイブ</b></button>'
+   +'<button id="tcDive" class="tb" type="button"><b>ダイブ</b><small>投げるから↑<br>スワイプで押し出し</small></button>'
    +'<div id="tcRot">📱 横向きにしてね</div>';
   document.body.appendChild(tc);
   const hn=document.createElement('div');hn.id='tcHint';hn.textContent='左：スティック（端まで倒すとダッシュ）／右：ドラッグで視点／投げる長押しでチャージ';tc.appendChild(hn);
@@ -2621,17 +2653,20 @@ if(TOUCH){(()=>{
     player.yaw-=dx*0.0055*k;player.pitch=Math.max(-1.5,Math.min(1.5,player.pitch-dy*0.0055*k));
   }
   function relAll(){
-    for(const id in T){const t=T[id];if(t.type==='btn'){t.el.classList.remove('on');acts[t.el.id].u()}}
+    for(const id in T){const t=T[id];if(t.type==='btn'){t.el.classList.remove('on');if(!t.fired)acts[t.el.id].u()}}
     for(const k of [bind.fw,bind.bk,bind.lf,bind.rt,bind.sprint])keys[k]=false;
     for(const id in T)delete T[id];base.style.display='none';
   }
-  function show(on){tc.style.display=on?'block':'none';if(!on)relAll()}
+  function show(on){tc.style.display=on?'block':'none';$('tcSens').style.display=(mode==='match')?'none':''; // 感度ボタンは練習系のときだけ（試合中は設定画面から）
+    if(!on||mode==='match'){if(!on)relAll();$('tcSensP').style.display='none'}}
   show(false);
   document.addEventListener('pointerlockchange',()=>show(locked));
   tc.addEventListener('touchstart',e=>{
+    if(e.target.closest&&e.target.closest('#tcSensP'))return; // 感度スライダーは普通に触れる
     e.preventDefault();
     for(const t of e.changedTouches){
       const b=t.target.closest&&t.target.closest('button');
+      if(b&&b.id==='tcSens'){const P=$('tcSensP');const o=P.style.display==='flex';P.style.display=o?'none':'flex';if(!o){$('tcSensR').value=sens;$('tcSensV').textContent=sens.toFixed(2)+'x'}continue}
       if(b&&b.id==='tcPause'){document.exitPointerLock();continue}
       if(b&&acts[b.id]){T[t.identifier]={type:'btn',el:b,x:t.clientX,y:t.clientY};b.classList.add('on');acts[b.id].d();continue}
       if(t.clientX<innerWidth*0.45){
@@ -2642,6 +2677,7 @@ if(TOUCH){(()=>{
     }
   },{passive:false});
   tc.addEventListener('touchmove',e=>{
+    if(e.target.closest&&e.target.closest('#tcSensP'))return;
     e.preventDefault();
     for(const t of e.changedTouches){
       const s=T[t.identifier];if(!s)continue;
@@ -2651,18 +2687,28 @@ if(TOUCH){(()=>{
         knob.style.transform='translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px))';setMove(dx,dy);
       }else if(s.type==='look'||(s.type==='btn'&&acts[s.el.id].look)){
         look(t.clientX-s.x,t.clientY-s.y,s.type==='btn');s.x=t.clientX;s.y=t.clientY;
+        if(s.type==='btn'&&!s.fired){ // 投げるボタンからダイブのカプセルへスワイプ → 押し出しダイブ
+          const r=$('tcDive').getBoundingClientRect();
+          if(t.clientX>r.left-12&&t.clientX<r.right+12&&t.clientY>r.top-4&&t.clientY<r.bottom){
+            s.fired=true;$('tcDive').classList.add('on');setTimeout(()=>$('tcDive').classList.remove('on'),250);
+            if(ball.held&&charging){charge=0;charging=false;powerEl.style.display='none';mev('mouseup',0);setTimeout(()=>{kev('keydown',bind.dive);setTimeout(()=>kev('keyup',bind.dive),120)},60)}
+            else{charging=false;powerEl.style.display='none';kev('keydown',bind.dive);setTimeout(()=>kev('keyup',bind.dive),120)}
+          }
+        }
       }
     }
   },{passive:false});
   const end=e=>{
+    if(e.target.closest&&e.target.closest('#tcSensP'))return;
     e.preventDefault();
     for(const t of e.changedTouches){
       const s=T[t.identifier];if(!s)continue;
-      if(s.type==='btn'){s.el.classList.remove('on');acts[s.el.id].u()}
+      if(s.type==='btn'){s.el.classList.remove('on');if(!s.fired)acts[s.el.id].u()}
       else if(s.type==='stick'){setMove(0,0);base.style.display='none'}
       delete T[t.identifier];
     }
   };
+  $('tcSensR').addEventListener('input',e=>{setSens(parseFloat(e.target.value));$('tcSensV').textContent=sens.toFixed(2)+'x'});
   tc.addEventListener('touchend',end,{passive:false});tc.addEventListener('touchcancel',end,{passive:false});
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&locked)document.exitPointerLock()});
 })()}
@@ -2671,11 +2717,11 @@ function throwBall(p){
   const dir=new THREE.Vector3();camera.getWorldDirection(dir);
   dir.y+=0.12;
   if(kk&&dir.z>0){dir.z=-dir.z;msg('キックオフは後ろにしかパスできない')} // 青の攻める向きは＋Z。キックオフは後ろ（−Z）へ
-  {const itp=intimNear(player.pos.x,player.pos.z,player);const tsp=teaseNear(player.pos.x,player.pos.z,'B');const j=((has(PSK,'buildup')||has(PSK,'vgpass'))?0:PMOD().jit)+(itp?0.16:0)+(tsp?0.12:0);if(itp)msg('威圧されている…');else if(tsp)msg('からかわれている…');if(j>0){dir.x+=(Math.random()-0.5)*j;dir.y+=(Math.random()-0.5)*j}} // パス精度が低いと少しブレる
+  {const itp=intimNear(player.pos.x,player.pos.z,player);const tsp=teaseNear(player.pos.x,player.pos.z,'B');const j=((has(PSK,'buildup')||has(PSK,'vgpass'))?0:PMOD().jit*(has(PSK,'longkick')&&p>=0.5?0.3:1))+(itp?0.16:0)+(tsp?0.12:0);if(itp)msg('威圧されている…');else if(tsp)msg('からかわれている…');if(j>0){dir.x+=(Math.random()-0.5)*j;dir.y+=(Math.random()-0.5)*j}} // パス精度が低いと少しブレる
   const vg=has(PSK,'vgpass')&&p<0.85;if(vg)dir.y=-0.03;
   dir.normalize();
   ball.p.copy(camera.position).addScaledVector(dir,0.7);
-  const fxm=shotFx(PSK,p,latOf(player.vel.x,player.vel.z,dir.x,dir.z),!player.ground,1)*(intimNear(player.pos.x,player.pos.z,player)?0.85:1)*(teaseNear(player.pos.x,player.pos.z,'B')?0.9:1)*(has(PSK,'ego')&&egoM>0?1+0.15*egoM/100:1)*(vg?1.1:1);
+  const fxm=shotFx(PSK,p,latOf(player.vel.x,player.vel.z,dir.x,dir.z),!player.ground,1)*(intimNear(player.pos.x,player.pos.z,player)?0.85:1)*(teaseNear(player.pos.x,player.pos.z,'B')?0.9:1)*(has(PSK,'ego')&&egoM>0?1+0.15*egoM/100:1)*(vg?1.1:1)*(has(PSK,'longkick')&&p>=0.5?1.1:1);
   ball.v.copy(dir).multiplyScalar(7+26*p*PMOD().thr*fxm);
   ball.v.x+=player.vel.x*0.5;ball.v.z+=player.vel.z*0.5;
   if(ball.curve)msg('ブリッツカーブ！');else if(ball.flat)msg('バレットハンド！');else if(ball.drive)msg('ピジョンストライク！');
@@ -2907,6 +2953,51 @@ const oppMk=(()=>{
   g.fillStyle='#fff';g.font='bold 34px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('相手プレイヤー',128,38);
   const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false,transparent:true,sizeAttenuation:false}));
   sp.scale.set(0.2,0.0875,1);sp.renderOrder=20;sp.visible=false;scene.add(sp);return sp})();
+
+/* ===== ミニマップ（時間表示の下）: 横向きのコート。自分の攻める向きが右 ===== */
+const mmEl=$('mmap'),mmG=mmEl.getContext('2d');let mmT=0;
+function mmUpdate(dt){
+  const on=matchStarted&&locked&&!matchOver;mmEl.style.display=on?'block':'none';if(!on)return;
+  mmT-=dt;if(mmT>0)return;mmT=0.05;
+  const W=mmEl.width,H=mmEl.height,fl=net.role==='guest'?-1:1,X=z=>W/2+fl*z/HL*(W-8)/2,Y=x=>H/2-fl*x/HW*(H-8)/2;
+  mmG.clearRect(0,0,W,H);
+  mmG.strokeStyle='rgba(255,255,255,.5)';mmG.lineWidth=2;mmG.strokeRect(4,4,W-8,H-8);
+  mmG.beginPath();mmG.moveTo(W/2,4);mmG.lineTo(W/2,H-4);mmG.stroke();
+  mmG.beginPath();mmG.arc(W/2,H/2,16,0,7);mmG.stroke();
+  mmG.fillStyle='rgba(90,169,255,.55)';mmG.fillRect(0,H/2-10,5,20); // 自分のゴール(左)
+  mmG.fillStyle='rgba(255,107,107,.55)';mmG.fillRect(W-5,H/2-10,5,20); // 相手のゴール(右)
+  const gs=net.role==='guest',mt=gs?'R':'B',mr=gs?net.myRole:playerRole;
+  for(const d of ORDER){const u=d.userData;if(!d.visible||(u.team===mt&&u.role===mr))continue; // 自分の役の分身は描かない
+    mmG.fillStyle=u.team==='B'?'#5aa9ff':'#ff6b6b';mmG.beginPath();mmG.arc(X(d.position.z),Y(d.position.x),6,0,7);mmG.fill();
+    if(u.role===0){mmG.strokeStyle='#fff';mmG.lineWidth=1.5;mmG.stroke()}}
+  // ボール
+  if(!ball.held||ball.ai){const bp=ball.ai?ball.ai.position:ball.p;mmG.fillStyle='#ffb000';mmG.strokeStyle='#000';mmG.lineWidth=1.5;mmG.beginPath();mmG.arc(X(bp.z),Y(bp.x),5,0,7);mmG.fill();mmG.stroke()}
+  // 自分（向きの三角形）
+  const px=X(player.pos.z),py=Y(player.pos.x),a=Math.atan2(Y(player.pos.x-Math.sin(player.yaw))-py,X(player.pos.z-Math.cos(player.yaw))-px);
+  mmG.save();mmG.translate(px,py);mmG.rotate(a);mmG.fillStyle='#fff';mmG.strokeStyle='#000';mmG.lineWidth=1.5;
+  mmG.beginPath();mmG.moveTo(11,0);mmG.lineTo(-7,-7);mmG.lineTo(-7,7);mmG.closePath();mmG.fill();mmG.stroke();mmG.restore();
+  if(ball.held&&!ball.ai){mmG.fillStyle='#ffb000';mmG.beginPath();mmG.arc(px,py,3,0,7);mmG.fill()}
+}
+
+/* ===== ボールが画面外のとき、画面の端に方向と距離を出す ===== */
+const biEl=$('bInd'),biU=biEl.firstElementChild,biB=biEl.lastElementChild;
+function ballInd(){
+  const on=matchStarted&&locked&&!matchOver&&!ball.held;
+  if(!on){biEl.style.display='none';return}
+  const bp=ball.ai?{x:ball.ai.position.x,y:ball.ai.position.y+1.2,z:ball.ai.position.z}:ball.p;
+  const dx=bp.x-player.pos.x,dy=bp.y-(player.pos.y+EYE),dz=bp.z-player.pos.z;
+  const sy=Math.sin(player.yaw),cy=Math.cos(player.yaw),sp=Math.sin(player.pitch),cp=Math.cos(player.pitch);
+  const f=[-sy*cp,sp,-cy*cp],r=[cy,0,-sy],u=[r[1]*f[2]-r[2]*f[1],r[2]*f[0]-r[0]*f[2],r[0]*f[1]-r[1]*f[0]];
+  const dep=dx*f[0]+dy*f[1]+dz*f[2],xr=dx*r[0]+dy*r[1]+dz*r[2],yu=dx*u[0]+dy*u[1]+dz*u[2];
+  const fv=(typeof camera.fov==='number'&&camera.fov>10&&camera.fov<150)?camera.fov:75,ty=Math.tan(fv*Math.PI/360),tx=ty*(innerWidth/Math.max(1,innerHeight));
+  let nx,ny;
+  if(dep>0.1){nx=xr/(dep*tx);ny=yu/(dep*ty);if(Math.abs(nx)<0.92&&Math.abs(ny)<0.88){biEl.style.display='none';return}}
+  else{nx=xr;ny=yu;if(Math.abs(nx)<0.01&&Math.abs(ny)<0.01)ny=-1} // 真後ろ付近は下端に
+  const m=Math.max(Math.abs(nx),Math.abs(ny))||1,sx=nx/m,syy=ny/m;
+  biEl.style.display='block';biEl.style.left=(50+sx*46)+'%';biEl.style.top=(50-syy*(syy>0?32:43))+'%';
+  biU.style.transform='rotate('+Math.atan2(-ny,nx)+'rad) translate(28px,0)';
+  biB.textContent=Math.round(Math.hypot(dx,dz))+'m';
+}
 function oppMark(G){
   let D=null;
   if(matchStarted&&!matchOver&&mode==='match'&&net.connected){
@@ -3274,7 +3365,7 @@ function loop(){
   if(net.role==='host'&&net.connected&&mode==='match'&&matchStarted&&!matchOver&&!htOn&&net.entered){ // オンラインのポーズ持ち時間（各60秒。0で反則負け）
     if(!locked)net.pz.h-=dt;if(net.gPz)net.pz.g-=dt;
     if(net.pz.h<=0)forfeit('B');else if(net.pz.g<=0)forfeit('R')}
-  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);oppMark(G);
+  tmWarn(G?net.mt:matchT,G?net.half:half);pzUi(G);oppMark(G);mmUpdate(dt);ballInd();
   if(playing&&phase==='play'&&resetTimer<=0&&mode==='match'&&!G){matchT-=dt;if(matchT<=0){matchT=0;if(half===1)halftime();else endMatch()}}
   // ロックが0.4秒以上外れ続けたときだけ「ロック喪失」と判定（一瞬のブレでは何もしない）
   if(locked&&document.pointerLockElement!==renderer.domElement){
